@@ -1,15 +1,13 @@
 package com.example.fitnessapp
 
+import android.view.View
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 
-class RegisterVM: ViewModel() {
-    var fio by mutableStateOf("")
-    var phone by mutableStateOf("")
+class LoginVM: ViewModel() {
     var email by mutableStateOf("")
     var password by mutableStateOf("")
-    var check by mutableStateOf(false)
     var visual by mutableStateOf(true)
 }

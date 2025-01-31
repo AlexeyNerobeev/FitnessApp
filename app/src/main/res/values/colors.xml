@@ -13,4 +13,6 @@
     <color name="onBoardingText">#B6B4C2</color>
     <color name="tfColor">#F7F8F8</color>
     <color name="placeholderColor">#ADA4A5</color>
+    <color name="borderColor">#C0EBE3</color>
+    <color name="clickableText">#60EBBA</color>
 </resources>
