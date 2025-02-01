@@ -15,4 +15,6 @@
     <color name="placeholderColor">#ADA4A5</color>
     <color name="borderColor">#C0EBE3</color>
     <color name="clickableText">#60EBBA</color>
+    <color name="startGr">#81CCBF</color>
+    <color name="endGr">#07856E</color>
 </resources>

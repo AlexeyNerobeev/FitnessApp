@@ -262,7 +262,7 @@ fun RegisterPage(navController: NavController, vm: RegisterVM) {
                         .align(Alignment.BottomCenter),
                         horizontalAlignment = Alignment.CenterHorizontally) {
                         Button(onClick = {
-
+                            navController.navigate(NavRoutes.RegisterPage2.route)
                         },
                             shape = RoundedCornerShape(100.dp),
                             modifier = Modifier
@@ -328,7 +328,8 @@ fun RegisterPage(navController: NavController, vm: RegisterVM) {
                             }
                         }
                         Row(modifier = Modifier
-                            .padding(top = 30.dp)) {
+                            .padding(top = 30.dp)
+                            .padding(bottom = 40.dp)) {
                             Text(text = "Имеете уже аккаунт? ",
                                 color = Color.Black,
                                 fontSize = 14.sp,
@@ -342,7 +343,7 @@ fun RegisterPage(navController: NavController, vm: RegisterVM) {
                                 fontWeight = FontWeight(500),
                                 modifier = Modifier
                                     .clickable {
-
+                                        navController.navigate(NavRoutes.LoginPage.route)
                                     }
                             )
                         }

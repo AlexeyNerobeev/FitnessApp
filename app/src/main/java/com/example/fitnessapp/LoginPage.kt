@@ -1,16 +1,21 @@
 package com.example.fitnessapp
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
@@ -43,7 +48,8 @@ fun LoginPage(navController: NavController, vm: LoginVM) {
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Column(modifier = Modifier
             .padding(innerPadding)
-            .fillMaxSize(),
+            .fillMaxSize()
+            .background(Color.White),
             horizontalAlignment = Alignment.CenterHorizontally) {
             Text(text = "Привет,",
                 color = Color.Black,
@@ -196,6 +202,69 @@ fun LoginPage(navController: NavController, vm: LoginVM) {
                                     .padding(start = 10.dp)
                             )
                         }
+                    }
+                    Image(
+                        painter = painterResource(R.drawable.or),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .padding(top = 20.dp))
+                    Row(modifier = Modifier
+                        .padding(top = 20.dp)) {
+                        IconButton(onClick = {
+
+                        },
+                            modifier = Modifier
+                                .border(
+                                    width = 0.8f.dp, color = colorResource(R.color.borderColor),
+                                    shape = RoundedCornerShape(14.dp)
+                                )
+                        ) {
+                            Image(
+                                painter = painterResource(R.drawable.google_icon),
+                                contentDescription = null,
+                                modifier = Modifier
+                                    .padding(15.dp)
+                                    .size(20.dp)
+                            )
+                        }
+                        IconButton(onClick = {
+
+                        },
+                            modifier = Modifier
+                                .padding(start = 30.dp)
+                                .border(
+                                    width = 0.8f.dp, color = colorResource(R.color.borderColor),
+                                    shape = RoundedCornerShape(14.dp)
+                                )
+                        ) {
+                            Image(
+                                painter = painterResource(R.drawable.yandex_icon),
+                                contentDescription = null,
+                                modifier = Modifier
+                                    .padding(15.dp)
+                                    .size(20.dp)
+                            )
+                        }
+                    }
+                    Row(modifier = Modifier
+                        .padding(top = 30.dp)
+                        .padding(bottom = 40.dp)) {
+                        Text(text = "Нет аккаунта? ",
+                            color = Color.Black,
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight(400),
+                            fontFamily = poppinsFont
+                        )
+                        Text(text = "Зарегистрироваться",
+                            color = colorResource(R.color.clickableText),
+                            fontFamily = poppinsFont,
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight(500),
+                            modifier = Modifier
+                                .clickable {
+                                    navController.navigate(NavRoutes.RegisterPage.route)
+                                }
+                        )
                     }
                 }
             }
