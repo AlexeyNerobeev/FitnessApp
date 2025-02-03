@@ -17,4 +17,5 @@
     <color name="clickableText">#60EBBA</color>
     <color name="startGr">#81CCBF</color>
     <color name="endGr">#07856E</color>
+    <color name="sRegText">#7B6F72</color>
 </resources>

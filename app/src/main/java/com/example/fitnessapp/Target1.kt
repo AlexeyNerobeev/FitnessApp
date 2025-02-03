@@ -8,10 +8,14 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -66,7 +70,7 @@ fun Target1(navController: NavController) {
                         .padding(top = 5.dp)
                )
             }
-            Row(modifier = Modifier
+            Box(modifier = Modifier
                 .padding(top = 50.dp)
                 .fillMaxWidth()) {
                 Box(modifier = Modifier
@@ -81,13 +85,15 @@ fun Target1(navController: NavController) {
                     .size(205.dp, 358.dp)
                 )
                 Box(modifier = Modifier
+                    .width(275.dp)
                     .background(brush = Brush.horizontalGradient(
                         colors = listOf(
                             colorResource(R.color.startGr),
                             colorResource(R.color.endGr)
                         )
                     ), shape = RoundedCornerShape(22.dp)
-                    )){
+                    )
+                    .align(Alignment.Center)){
                     Column(modifier = Modifier
                         .padding(top = 35.dp)
                         .fillMaxWidth(),
@@ -126,8 +132,8 @@ fun Target1(navController: NavController) {
                     }
                 }
                 Box(modifier = Modifier
-                    .padding(start = 20.dp)
-                    .offset(x = 345.dp)
+                    .align(Alignment.TopEnd)
+                    .offset(x = 175.dp)
                     .padding(top = 90.dp)
                     .background(brush = Brush.horizontalGradient(
                         colors = listOf(
@@ -137,6 +143,36 @@ fun Target1(navController: NavController) {
                     ), shape = RoundedCornerShape(22.dp))
                     .size(205.dp, 358.dp)
                 )
+            }
+            Box(modifier = Modifier
+                .fillMaxSize(),
+                contentAlignment = Alignment.BottomCenter){
+                Button(onClick = {
+                    navController.navigate(NavRoutes.SuccessRegistration.route)
+                },
+                    modifier = Modifier
+                        .padding(horizontal = 30.dp)
+                        .padding(bottom = 40.dp)
+                        .background(brush = Brush.horizontalGradient(
+                            colors = listOf(
+                                colorResource(R.color.startGradient),
+                                colorResource(R.color.endGradient)
+                            )
+                        ),
+                            shape = RoundedCornerShape(99.dp))
+                        .fillMaxWidth()
+                        .height(60.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        contentColor = Color.White,
+                        containerColor = Color.Transparent
+                    )) {
+                    Text(text = "Подтвердить",
+                        color = Color.White,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight(700),
+                        fontFamily = montserratBold
+                   )
+                }
             }
         }
     }

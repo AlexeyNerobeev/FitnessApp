@@ -339,7 +339,7 @@ fun RegisterPage2(navController: NavController, vm: RegisterVM) {
                         containerColor = Color.Transparent
                     )
                 ) {
-                    Row() {
+                    Row{
                         Text(
                             text = "Далее",
                             color = Color.White,

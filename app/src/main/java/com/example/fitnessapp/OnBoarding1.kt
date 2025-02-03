@@ -28,16 +28,15 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 
-//@Preview
-//@Composable
-//fun PrevOnB1(){
-//    val n = rememberNavController()
-//    OnBoarding1(n)
-//}
-
 @Preview
 @Composable
-fun OnBoarding1() {
+fun PrevOnB1(){
+    val n = rememberNavController()
+    OnBoarding1(n)
+}
+
+@Composable
+fun OnBoarding1(navController: NavController) {
     Scaffold(modifier = Modifier
         .fillMaxSize()) {innerPadding ->
         Column(modifier = Modifier
@@ -70,14 +69,14 @@ fun OnBoarding1() {
             Box(modifier = Modifier
                 .fillMaxSize()){
                 IconButton(onClick = {
-
+                    navController.navigate(NavRoutes.OnBoarding2.route)
                 },
                     modifier = Modifier
                         .align(Alignment.BottomEnd)
                         .padding(end = 35.dp)
-                        .padding(bottom = 45.dp)) {
+                        .padding(bottom = 40.dp)) {
                     Box(modifier = Modifier
-                        .size(50.dp)
+                        .size(60.dp)
                         .background(brush = Brush.horizontalGradient(
                             colors = listOf(
                                 colorResource(R.color.startGradient),

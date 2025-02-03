@@ -262,7 +262,7 @@ fun RegisterPage(navController: NavController, vm: RegisterVM) {
                         .align(Alignment.BottomCenter),
                         horizontalAlignment = Alignment.CenterHorizontally) {
                         Button(onClick = {
-                            navController.navigate(NavRoutes.RegisterPage2.route)
+                            navController.navigate(NavRoutes.OnBoarding1.route)
                         },
                             shape = RoundedCornerShape(100.dp),
                             modifier = Modifier
