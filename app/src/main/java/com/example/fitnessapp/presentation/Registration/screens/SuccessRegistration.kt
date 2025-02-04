@@ -1,8 +1,7 @@
-package com.example.fitnessapp
+package com.example.fitnessapp.presentation.Registration.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.content.MediaType.Companion.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -26,6 +25,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.fitnessapp.R
+import com.example.fitnessapp.presentation.Registration.models.RegisterVM
+import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
 
 @Preview
 @Composable
@@ -90,7 +92,8 @@ fun SuccessRegistration(navController: NavController, vm: RegisterVM) {
                         color = Color.White,
                         fontWeight = FontWeight(700),
                         fontSize = 16.sp,
-                        fontFamily = montserratBold)
+                        fontFamily = montserratBold
+                    )
                 }
             }
         }

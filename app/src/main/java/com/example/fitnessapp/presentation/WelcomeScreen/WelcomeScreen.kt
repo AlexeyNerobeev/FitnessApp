@@ -1,4 +1,4 @@
-package com.example.fitnessapp
+package com.example.fitnessapp.presentation.WelcomeScreen
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -20,7 +20,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -34,6 +33,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.fitnessapp.presentation.MainActivity.navigation.NavRoutes
+import com.example.fitnessapp.presentation.MainActivity.navigation.Navigation
+import com.example.fitnessapp.R
 import com.example.fitnessapp.ui.theme.FitnessAppTheme
 
 class WelcomeActivity : ComponentActivity() {

@@ -1,4 +1,4 @@
-package com.example.fitnessapp
+package com.example.fitnessapp.presentation.Registration.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -14,7 +14,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
@@ -36,6 +35,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.fitnessapp.presentation.MainActivity.navigation.NavRoutes
+import com.example.fitnessapp.R
+import com.example.fitnessapp.presentation.Registration.models.RegisterVM
+import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
 
 @Preview
 @Composable

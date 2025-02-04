@@ -18,4 +18,7 @@
     <color name="startGr">#81CCBF</color>
     <color name="endGr">#07856E</color>
     <color name="sRegText">#7B6F72</color>
+    <color name="shadowColor">#1D161712</color>
+    <color name="mealPlannerBG">#DEF2EE</color>
+    <color name="mealPlannerButton">#68C6B6</color>
 </resources>

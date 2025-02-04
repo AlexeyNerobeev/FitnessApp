@@ -1,4 +1,4 @@
-package com.example.fitnessapp
+package com.example.fitnessapp.presentation.OnBoard
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -20,13 +20,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.fitnessapp.presentation.MainActivity.navigation.NavRoutes
+import com.example.fitnessapp.R
+import com.example.fitnessapp.presentation.Registration.screens.montserratBold
+import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
 
 @Preview
 @Composable

@@ -1,4 +1,4 @@
-package com.example.fitnessapp
+package com.example.fitnessapp.presentation.Login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -32,8 +32,14 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.fitnessapp.presentation.MainActivity.navigation.NavRoutes
+import com.example.fitnessapp.R
+import com.example.fitnessapp.presentation.Registration.screens.montserratBold
+import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
+import com.example.fitnessapp.presentation.WelcomeScreen.poppinsFont
 
 @Preview
 @Composable
@@ -44,7 +50,7 @@ fun PrevLogin(){
 }
 
 @Composable
-fun LoginPage(navController: NavController, vm: LoginVM) {
+fun LoginPage(navController: NavController, vm: LoginVM = viewModel()) {
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Column(modifier = Modifier
             .padding(innerPadding)

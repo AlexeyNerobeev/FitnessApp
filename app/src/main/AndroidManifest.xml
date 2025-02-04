@@ -13,13 +13,13 @@
         android:theme="@style/Theme.FitnessApp"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".presentation.MainActivity.screens.MainActivity"
             android:exported="false"
             android:label="@string/app_name"
             android:theme="@style/Theme.FitnessApp">
         </activity>
         <activity
-            android:name=".WelcomeActivity"
+            android:name=".presentation.WelcomeScreen.WelcomeActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.FitnessApp">
