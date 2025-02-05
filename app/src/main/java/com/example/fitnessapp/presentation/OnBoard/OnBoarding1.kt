@@ -1,18 +1,26 @@
 package com.example.fitnessapp.presentation.OnBoard
 
+import android.content.SharedPreferences
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.draggable
+import androidx.compose.foundation.gestures.rememberDraggableState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -35,17 +43,26 @@ import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
 @Composable
 fun PrevOnB1(){
     val n = rememberNavController()
-    OnBoarding1(n)
+    val vm = OnBoardVM()
+    OnBoarding1(n, vm)
 }
 
 @Composable
-fun OnBoarding1(navController: NavController) {
+fun OnBoarding1(navController: NavController, vm: OnBoardVM) {
     Scaffold(modifier = Modifier
         .fillMaxSize()) {innerPadding ->
         Column(modifier = Modifier
             .padding(innerPadding)
             .fillMaxSize()
-            .background(Color.White)) {
+            .background(Color.White)
+            .draggable(
+                orientation = Orientation.Horizontal,
+                state = rememberDraggableState { distance ->
+                    vm.swipe = distance <= -100
+                    if(vm.swipe)
+                        navController.navigate(NavRoutes.OnBoarding2.route)
+                }
+            )) {
             Image(painter = painterResource(R.drawable.onb1_art),
                 contentDescription = null,
                 modifier = Modifier
@@ -70,27 +87,30 @@ fun OnBoarding1(navController: NavController) {
                     .padding(top = 10.dp)
            )
             Box(modifier = Modifier
-                .fillMaxSize()){
+                .fillMaxSize(),
+                contentAlignment = Alignment.BottomEnd){
                 IconButton(onClick = {
                     navController.navigate(NavRoutes.OnBoarding2.route)
                 },
+                    colors = IconButtonDefaults.iconButtonColors(
+                        containerColor = Color.Transparent,
+                        contentColor = Color.White
+                    ),
                     modifier = Modifier
-                        .align(Alignment.BottomEnd)
-                        .padding(end = 35.dp)
-                        .padding(bottom = 40.dp)) {
-                    Box(modifier = Modifier
-                        .size(60.dp)
+                        .padding(bottom = 40.dp)
+                        .padding(end = 30.dp)
                         .background(brush = Brush.horizontalGradient(
                             colors = listOf(
                                 colorResource(R.color.startGradient),
                                 colorResource(R.color.endGradient)
                             )
-                        )),
-                        contentAlignment = Alignment.Center){
-                        Icon(painter = painterResource(R.drawable.arrow),
-                            contentDescription = null,
-                            tint = Color.White)
-                    }
+                        ),
+                            shape = CircleShape
+                        )
+                        .size(60.dp)) {
+                    Icon(painter = painterResource(R.drawable.arrow),
+                        contentDescription = null,
+                        tint = Color.White)
                 }
             }
         }

@@ -42,7 +42,8 @@ android {
 
 dependencies {
 
-    implementation("io.ktor:ktor-client-[engine]:3.0.3")
+    implementation("io.ktor:ktor-client-core:3.0.3")
+    implementation("io.ktor:ktor-client-cio:3.0.3")
 
     implementation(platform("io.github.jan-tennert.supabase:bom:3.1.0"))
     implementation("io.github.jan-tennert.supabase:postgrest-kt")

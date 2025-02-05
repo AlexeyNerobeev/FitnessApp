@@ -100,7 +100,7 @@ fun WelcomeScreen(navController: NavController) {
             Box(modifier = Modifier
                 .fillMaxSize()){
                 Button(onClick = {
-                    navController.navigate(NavRoutes.RegisterPage.route)
+                    navController.navigate(NavRoutes.OnBoarding1.route)
                 },
                     modifier = Modifier
                         .padding(horizontal = 30.dp)
