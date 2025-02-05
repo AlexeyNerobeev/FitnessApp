@@ -28,6 +28,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -149,6 +151,12 @@ fun LoginPage(navController: NavController, vm: LoginVM = viewModel()) {
                                 .padding(start = 15.dp)
                         )
                     },
+                    visualTransformation =
+                        if(vm.visual){
+                            PasswordVisualTransformation()
+                        } else{
+                            VisualTransformation.None
+                        },
                     modifier = Modifier
                         .padding(top = 15.dp)
                         .fillMaxWidth(),
@@ -160,6 +168,9 @@ fun LoginPage(navController: NavController, vm: LoginVM = viewModel()) {
                             modifier = Modifier
                                 .padding(vertical = 15.dp)
                                 .padding(end = 15.dp)
+                                .clickable {
+                                    vm.visual = !vm.visual
+                                }
                         )
                     }
                 )

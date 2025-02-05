@@ -2,6 +2,9 @@ package com.example.fitnessapp.presentation.OnBoard
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.draggable
+import androidx.compose.foundation.gestures.rememberDraggableState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -36,16 +40,25 @@ import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
 @Composable
 fun PrevOnB3(){
     val n = rememberNavController()
-    OnBoarding3(n)
+    val vm = OnBoardVM()
+    OnBoarding3(n, vm)
 }
 
 @Composable
-fun OnBoarding3(navController: NavController) {
+fun OnBoarding3(navController: NavController, vm: OnBoardVM) {
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Column(modifier = Modifier
             .fillMaxSize()
+            .padding(innerPadding)
             .background(Color.White)
-            .padding(innerPadding)) {
+            .draggable(
+                orientation = Orientation.Horizontal,
+                state = rememberDraggableState { distance ->
+                    vm.swipe = distance <= -100
+                    if(vm.swipe)
+                        navController.navigate(NavRoutes.OnBoarding4.route)
+                }
+            )) {
             Image(painter = painterResource(R.drawable.onb3_art),
                 contentDescription = null,
                 modifier = Modifier.fillMaxWidth())

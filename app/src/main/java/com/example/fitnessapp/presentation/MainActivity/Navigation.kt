@@ -8,6 +8,7 @@ import com.example.fitnessapp.presentation.Registration.screens.SuccessRegistrat
 import com.example.fitnessapp.presentation.Target.Target1
 import com.example.fitnessapp.presentation.Login.LoginVM
 import com.example.fitnessapp.presentation.Login.LoginPage
+import com.example.fitnessapp.presentation.OnBoard.OnBoardVM
 import com.example.fitnessapp.presentation.OnBoard.OnBoarding1
 import com.example.fitnessapp.presentation.OnBoard.OnBoarding2
 import com.example.fitnessapp.presentation.OnBoard.OnBoarding3
@@ -22,12 +23,13 @@ fun Navigation(){
     val navController = rememberNavController()
     val registerVM = RegisterVM()
     val loginVM = LoginVM()
+    val onBoardVM = OnBoardVM()
     NavHost(navController = navController, startDestination = NavRoutes.WelcomeScreen.route){
         composable(NavRoutes.WelcomeScreen.route){ WelcomeScreen(navController) }
-        composable(NavRoutes.OnBoarding1.route){ OnBoarding1(navController) }
-        composable(NavRoutes.OnBoarding2.route){ OnBoarding2(navController) }
-        composable(NavRoutes.OnBoarding3.route){ OnBoarding3(navController) }
-        composable(NavRoutes.OnBoarding4.route){ OnBoarding4(navController) }
+        composable(NavRoutes.OnBoarding1.route){ OnBoarding1(navController, onBoardVM) }
+        composable(NavRoutes.OnBoarding2.route){ OnBoarding2(navController, onBoardVM) }
+        composable(NavRoutes.OnBoarding3.route){ OnBoarding3(navController, onBoardVM) }
+        composable(NavRoutes.OnBoarding4.route){ OnBoarding4(navController, onBoardVM) }
         composable(NavRoutes.RegisterPage.route){ RegisterPage(navController, registerVM) }
         composable(NavRoutes.LoginPage.route){ LoginPage(navController, loginVM) }
         composable(NavRoutes.RegisterPage2.route){ RegisterPage2(navController, registerVM) }
