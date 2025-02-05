@@ -1,4 +1,4 @@
-package com.example.fitnessapp.presentation.MainActivity.navigation
+package com.example.fitnessapp.presentation.MainActivity
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost

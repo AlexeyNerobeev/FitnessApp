@@ -1,4 +1,4 @@
-package com.example.fitnessapp.presentation.MainActivity.screens
+package com.example.fitnessapp.presentation.MainActivity
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.R
-import com.example.fitnessapp.presentation.MainActivity.navigation.NavRoutes
+import com.example.fitnessapp.presentation.MainActivity.NavRoutes
 import com.example.fitnessapp.presentation.Registration.screens.montserratBold
 import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
 

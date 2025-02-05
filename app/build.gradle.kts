@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    kotlin("plugin.serialization") version "1.9.20"
 }
 
 android {
@@ -40,6 +41,14 @@ android {
 }
 
 dependencies {
+
+    implementation("io.ktor:ktor-client-[engine]:3.0.3")
+
+    implementation(platform("io.github.jan-tennert.supabase:bom:3.1.0"))
+    implementation("io.github.jan-tennert.supabase:postgrest-kt")
+    implementation("io.github.jan-tennert.supabase:auth-kt")
+    implementation("io.github.jan-tennert.supabase:realtime-kt")
+
 
     implementation ("androidx.navigation:navigation-compose:2.8.5")
 

@@ -33,8 +33,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.fitnessapp.presentation.MainActivity.navigation.NavRoutes
-import com.example.fitnessapp.presentation.MainActivity.navigation.Navigation
+import com.example.fitnessapp.presentation.MainActivity.NavRoutes
+import com.example.fitnessapp.presentation.MainActivity.Navigation
 import com.example.fitnessapp.R
 import com.example.fitnessapp.ui.theme.FitnessAppTheme
 
