@@ -23,6 +23,7 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -32,6 +33,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -39,9 +43,13 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.presentation.WelcomeScreen.NavRoutes
 import com.example.fitnessapp.R
+import com.example.fitnessapp.data.registration.Registration
 import com.example.fitnessapp.presentation.Registration.models.RegisterVM
 import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
 import com.example.fitnessapp.presentation.WelcomeScreen.poppinsFont
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 val montserratBold = FontFamily(
     Font(
@@ -85,7 +93,7 @@ fun RegisterPage(navController: NavController, vm: RegisterVM) {
                 .padding(top = 30.dp)
                 .padding(horizontal = 30.dp)
                 .fillMaxWidth()) {
-                OutlinedTextField(value = "",
+                OutlinedTextField(value = vm.fio,
                     onValueChange = {
                         vm.fio = it
                     },
@@ -119,7 +127,7 @@ fun RegisterPage(navController: NavController, vm: RegisterVM) {
                                 .padding(vertical = 15.dp))
                     }
                 )
-                OutlinedTextField(value = "",
+                OutlinedTextField(value = vm.phone,
                     onValueChange = {
                         vm.phone = it
                     },
@@ -154,7 +162,7 @@ fun RegisterPage(navController: NavController, vm: RegisterVM) {
                                 .padding(vertical = 15.dp))
                     }
                 )
-                OutlinedTextField(value = "",
+                OutlinedTextField(value = vm.email,
                     onValueChange = {
                         vm.email = it
                     },
@@ -189,7 +197,7 @@ fun RegisterPage(navController: NavController, vm: RegisterVM) {
                                 .padding(vertical = 15.dp))
                     }
                 )
-                OutlinedTextField(value = "",
+                OutlinedTextField(value = vm.password,
                     onValueChange = {
                         vm.password = it
                     },
@@ -223,13 +231,18 @@ fun RegisterPage(navController: NavController, vm: RegisterVM) {
                                 .padding(start = 15.dp)
                                 .padding(vertical = 15.dp))
                     },
+                    visualTransformation = if(vm.visual) PasswordVisualTransformation()
+                    else VisualTransformation.None,
                     trailingIcon = {
                         Icon(painter = painterResource(R.drawable.hide_icon),
                             contentDescription = null,
                             tint = Color.Unspecified,
                             modifier = Modifier
                                 .padding(end = 15.dp)
-                                .padding(vertical = 15.dp))
+                                .padding(vertical = 15.dp)
+                                .clickable {
+                                    vm.visual = !vm.visual
+                                })
                     }
                 )
                 Row(modifier = Modifier
@@ -260,8 +273,18 @@ fun RegisterPage(navController: NavController, vm: RegisterVM) {
                     Column(modifier = Modifier
                         .align(Alignment.BottomCenter),
                         horizontalAlignment = Alignment.CenterHorizontally) {
+                        val coroutine = rememberCoroutineScope()
                         Button(onClick = {
-                            navController.navigate(NavRoutes.OnBoarding1.route)
+                            if(vm.check){
+                                coroutine.launch {
+                                    val registration = Registration()
+                                    registration.registration(
+                                        vm.email,
+                                        vm.password,
+                                        navController
+                                    )
+                                }
+                            }
                         },
                             shape = RoundedCornerShape(100.dp),
                             modifier = Modifier
