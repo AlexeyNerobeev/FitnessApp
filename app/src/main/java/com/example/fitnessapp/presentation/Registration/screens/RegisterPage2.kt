@@ -35,7 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.fitnessapp.presentation.MainActivity.NavRoutes
+import com.example.fitnessapp.presentation.WelcomeScreen.NavRoutes
 import com.example.fitnessapp.R
 import com.example.fitnessapp.presentation.Registration.models.RegisterVM
 import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular

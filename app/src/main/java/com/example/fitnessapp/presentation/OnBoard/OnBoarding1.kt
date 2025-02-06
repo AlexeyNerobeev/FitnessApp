@@ -1,6 +1,5 @@
 package com.example.fitnessapp.presentation.OnBoard
 
-import android.content.SharedPreferences
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.Orientation
@@ -19,13 +18,12 @@ import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -34,8 +32,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.fitnessapp.presentation.MainActivity.NavRoutes
+import com.example.fitnessapp.presentation.WelcomeScreen.NavRoutes
 import com.example.fitnessapp.R
+import com.example.fitnessapp.data.sharedPreferences.SharedPreferences
 import com.example.fitnessapp.presentation.Registration.screens.montserratBold
 import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
 
@@ -48,7 +47,9 @@ fun PrevOnB1(){
 }
 
 @Composable
-fun OnBoarding1(navController: NavController, vm: OnBoardVM) {
+fun OnBoarding1(navController: NavController, vm: OnBoardVM){
+    val prefs = SharedPreferences(LocalContext.current)
+    prefs.SavePreferences(1)
     Scaffold(modifier = Modifier
         .fillMaxSize()) {innerPadding ->
         Column(modifier = Modifier

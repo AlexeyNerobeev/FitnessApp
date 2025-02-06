@@ -1,4 +1,4 @@
-package com.example.fitnessapp.presentation.MainActivity
+package com.example.fitnessapp.presentation.WelcomeScreen
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
@@ -16,7 +16,6 @@ import com.example.fitnessapp.presentation.OnBoard.OnBoarding4
 import com.example.fitnessapp.presentation.Registration.models.RegisterVM
 import com.example.fitnessapp.presentation.Registration.screens.RegisterPage
 import com.example.fitnessapp.presentation.Registration.screens.RegisterPage2
-import com.example.fitnessapp.presentation.WelcomeScreen.WelcomeScreen
 
 @Composable
 fun Navigation(){
