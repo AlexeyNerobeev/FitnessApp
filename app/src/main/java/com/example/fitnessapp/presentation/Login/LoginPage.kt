@@ -21,6 +21,7 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -39,9 +40,12 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.presentation.WelcomeScreen.NavRoutes
 import com.example.fitnessapp.R
+import com.example.fitnessapp.data.auth.Auth
 import com.example.fitnessapp.presentation.Registration.screens.montserratBold
 import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
 import com.example.fitnessapp.presentation.WelcomeScreen.poppinsFont
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @Preview
 @Composable
@@ -53,9 +57,6 @@ fun PrevLogin(){
 
 @Composable
 fun LoginPage(navController: NavController, vm: LoginVM = viewModel()) {
-
-    val state = vm.state.value
-
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Column(modifier = Modifier
             .padding(innerPadding)
@@ -83,9 +84,9 @@ fun LoginPage(navController: NavController, vm: LoginVM = viewModel()) {
                 .fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally) {
                 OutlinedTextField(
-                    value = state.email,
+                    value = vm.email,
                     onValueChange = {
-                        vm.onEvent(LoginEvent.EnterEmail(it))
+                        vm.email = it
                     },
                     colors = OutlinedTextFieldDefaults.colors(
                         unfocusedBorderColor = colorResource(R.color.tfColor),
@@ -177,7 +178,7 @@ fun LoginPage(navController: NavController, vm: LoginVM = viewModel()) {
                         )
                     }
                 )
-                Text(text = "Забыл пароль?",
+                Text(text = vm.email,
                     color = colorResource(R.color.placeholderColor),
                     fontWeight = FontWeight(500),
                     fontSize = 12.sp,
@@ -193,8 +194,12 @@ fun LoginPage(navController: NavController, vm: LoginVM = viewModel()) {
                     .padding(horizontal = 30.dp)
                     .align(Alignment.BottomCenter),
                     horizontalAlignment = Alignment.CenterHorizontally) {
+                    val coroutine = rememberCoroutineScope()
                     Button(onClick = {
-
+                        coroutine.launch(Dispatchers.IO) {
+                            val auth = Auth()
+                            auth.auth(vm.email, vm.password, navController)
+                        }
                     },
                         modifier = Modifier
                             .background(brush = Brush.horizontalGradient(
@@ -243,7 +248,6 @@ fun LoginPage(navController: NavController, vm: LoginVM = viewModel()) {
                                 painter = painterResource(R.drawable.google_icon),
                                 contentDescription = null,
                                 modifier = Modifier
-                                    .padding(15.dp)
                                     .size(20.dp)
                             )
                         }
@@ -261,7 +265,6 @@ fun LoginPage(navController: NavController, vm: LoginVM = viewModel()) {
                                 painter = painterResource(R.drawable.yandex_icon),
                                 contentDescription = null,
                                 modifier = Modifier
-                                    .padding(15.dp)
                                     .size(20.dp)
                             )
                         }

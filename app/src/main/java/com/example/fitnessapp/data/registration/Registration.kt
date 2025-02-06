@@ -1,8 +1,10 @@
 package com.example.fitnessapp.data.registration
 
 import android.util.Log
+import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import com.example.fitnessapp.data.supabase.Connect.supabase
+import com.example.fitnessapp.presentation.IncorrectEmailSnackBar.IncorrectEmailSnackBar
 import com.example.fitnessapp.presentation.Registration.models.RegisterVM
 import com.example.fitnessapp.presentation.WelcomeScreen.NavRoutes
 import io.github.jan.supabase.auth.auth

@@ -44,6 +44,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.presentation.WelcomeScreen.NavRoutes
 import com.example.fitnessapp.R
 import com.example.fitnessapp.data.registration.Registration
+import com.example.fitnessapp.domain.usecase.EmailValidationUseCase
+import com.example.fitnessapp.presentation.IncorrectEmailSnackBar.IncorrectEmailSnackBar
 import com.example.fitnessapp.presentation.Registration.models.RegisterVM
 import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
 import com.example.fitnessapp.presentation.WelcomeScreen.poppinsFont
@@ -274,16 +276,23 @@ fun RegisterPage(navController: NavController, vm: RegisterVM) {
                         .align(Alignment.BottomCenter),
                         horizontalAlignment = Alignment.CenterHorizontally) {
                         val coroutine = rememberCoroutineScope()
+                        val emailCheck = EmailValidationUseCase()
                         Button(onClick = {
                             if(vm.check){
-                                coroutine.launch {
-                                    val registration = Registration()
-                                    registration.registration(
-                                        vm.email,
-                                        vm.password,
-                                        navController
-                                    )
+                                if(emailCheck.CheckEmail(vm.email)){
+                                    coroutine.launch {
+                                        val registration = Registration()
+                                        registration.registration(
+                                            vm.email,
+                                            vm.password,
+                                            navController
+                                        )
+                                    }
+                                } else{
+                                    vm.error = "Некорректная почта"
                                 }
+                            } else{
+                                vm.error = "Примите Политику конфиденциальности"
                             }
                         },
                             shape = RoundedCornerShape(100.dp),
@@ -326,7 +335,6 @@ fun RegisterPage(navController: NavController, vm: RegisterVM) {
                                     painter = painterResource(R.drawable.google_icon),
                                     contentDescription = null,
                                     modifier = Modifier
-                                        .padding(15.dp)
                                         .size(20.dp)
                                 )
                             }
@@ -344,7 +352,6 @@ fun RegisterPage(navController: NavController, vm: RegisterVM) {
                                     painter = painterResource(R.drawable.yandex_icon),
                                     contentDescription = null,
                                     modifier = Modifier
-                                        .padding(15.dp)
                                         .size(20.dp)
                                 )
                             }
@@ -371,6 +378,13 @@ fun RegisterPage(navController: NavController, vm: RegisterVM) {
                         }
                     }
                 }
+            }
+        }
+        Box(modifier = Modifier
+            .fillMaxSize(),
+            contentAlignment = Alignment.BottomCenter){
+            if(vm.error.isNotEmpty()){
+                IncorrectEmailSnackBar(vm.error)
             }
         }
     }

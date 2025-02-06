@@ -13,6 +13,8 @@ class RegisterVM: ViewModel() {
     var password by mutableStateOf("")
     var check by mutableStateOf(false)
     var visual by mutableStateOf(true)
+    var error by mutableStateOf("")
+    var isError by mutableStateOf(false)
 
     var gender by mutableStateOf("")
     var birthday by mutableStateOf("")
