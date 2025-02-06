@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
@@ -33,9 +34,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.fitnessapp.presentation.MainActivity.NavRoutes
-import com.example.fitnessapp.presentation.MainActivity.Navigation
 import com.example.fitnessapp.R
+import com.example.fitnessapp.data.sharedPreferences.SharedPreferences
 import com.example.fitnessapp.ui.theme.FitnessAppTheme
 
 class WelcomeActivity : ComponentActivity() {
@@ -71,6 +71,7 @@ fun PrevWelcome(){
 
 @Composable
 fun WelcomeScreen(navController: NavController) {
+    val prefs = SharedPreferences(LocalContext.current)
     Scaffold(modifier = Modifier
         .fillMaxSize()) { innerPadding ->
         Column(modifier = Modifier
@@ -100,7 +101,13 @@ fun WelcomeScreen(navController: NavController) {
             Box(modifier = Modifier
                 .fillMaxSize()){
                 Button(onClick = {
-                    navController.navigate(NavRoutes.OnBoarding1.route)
+                    when (prefs.GetPreferences()) {
+                        0 -> navController.navigate(NavRoutes.OnBoarding1.route)
+                        1 -> navController.navigate(NavRoutes.OnBoarding2.route)
+                        2 -> navController.navigate(NavRoutes.OnBoarding3.route)
+                        3 -> navController.navigate(NavRoutes.OnBoarding4.route)
+                        4 -> navController.navigate(NavRoutes.LoginPage.route)
+                    }
                 },
                     modifier = Modifier
                         .padding(horizontal = 30.dp)
@@ -108,13 +115,15 @@ fun WelcomeScreen(navController: NavController) {
                         .padding(bottom = 40.dp)
                         .fillMaxWidth()
                         .height(60.dp)
-                        .background(brush = Brush.horizontalGradient(
-                            colors = listOf(
-                                colorResource(R.color.startGradient),
-                                colorResource(R.color.endGradient)
-                            )
+                        .background(
+                            brush = Brush.horizontalGradient(
+                                colors = listOf(
+                                    colorResource(R.color.startGradient),
+                                    colorResource(R.color.endGradient)
+                                )
+                            ),
+                            RoundedCornerShape(99.dp)
                         ),
-                            RoundedCornerShape(99.dp)),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color.Transparent,
                         contentColor = Color.White

@@ -37,7 +37,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.fitnessapp.presentation.MainActivity.NavRoutes
+import com.example.fitnessapp.presentation.WelcomeScreen.NavRoutes
 import com.example.fitnessapp.R
 import com.example.fitnessapp.presentation.Registration.screens.montserratBold
 import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
@@ -53,6 +53,9 @@ fun PrevLogin(){
 
 @Composable
 fun LoginPage(navController: NavController, vm: LoginVM = viewModel()) {
+
+    val state = vm.state.value
+
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Column(modifier = Modifier
             .padding(innerPadding)
@@ -80,9 +83,9 @@ fun LoginPage(navController: NavController, vm: LoginVM = viewModel()) {
                 .fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally) {
                 OutlinedTextField(
-                    value = vm.email,
+                    value = state.email,
                     onValueChange = {
-                        vm.email = it
+                        vm.onEvent(LoginEvent.EnterEmail(it))
                     },
                     colors = OutlinedTextFieldDefaults.colors(
                         unfocusedBorderColor = colorResource(R.color.tfColor),
