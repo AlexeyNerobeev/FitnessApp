@@ -14,7 +14,7 @@
         android:theme="@style/Theme.FitnessApp"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.MainActivity.MainActivity"
+            android:name=".presentation.Home.HomeScreen"
             android:exported="false"
             android:label="@string/app_name"
             android:theme="@style/Theme.FitnessApp">

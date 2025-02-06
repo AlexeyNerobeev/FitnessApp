@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.fitnessapp.presentation.Home.HomeScreen
 import com.example.fitnessapp.presentation.Registration.screens.SuccessRegistration
 import com.example.fitnessapp.presentation.Target.Target1
 import com.example.fitnessapp.presentation.Login.LoginVM
@@ -34,6 +35,7 @@ fun Navigation(){
         composable(NavRoutes.RegisterPage2.route){ RegisterPage2(navController, registerVM) }
         composable(NavRoutes.Target1.route){ Target1(navController) }
         composable(NavRoutes.SuccessRegistration.route){ SuccessRegistration(navController, registerVM) }
+        composable(NavRoutes.Home.route){ HomeScreen(navController)}
     }
 }
 
@@ -48,4 +50,5 @@ sealed class NavRoutes(val route: String){
     object RegisterPage2: NavRoutes("RegisterPage2")
     object Target1: NavRoutes("Target1")
     object SuccessRegistration: NavRoutes("SuccessRegistration")
+    object Home: NavRoutes("Home")
 }
