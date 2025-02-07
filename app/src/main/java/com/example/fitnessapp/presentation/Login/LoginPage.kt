@@ -178,7 +178,7 @@ fun LoginPage(navController: NavController, vm: LoginVM = viewModel()) {
                         )
                     }
                 )
-                Text(text = vm.email,
+                Text(text = "Забыл пароль?",
                     color = colorResource(R.color.placeholderColor),
                     fontWeight = FontWeight(500),
                     fontSize = 12.sp,
@@ -196,10 +196,7 @@ fun LoginPage(navController: NavController, vm: LoginVM = viewModel()) {
                     horizontalAlignment = Alignment.CenterHorizontally) {
                     val coroutine = rememberCoroutineScope()
                     Button(onClick = {
-                        coroutine.launch(Dispatchers.IO) {
-                            val auth = Auth()
-                            auth.auth(vm.email, vm.password, navController)
-                        }
+                        vm.onEvent(LoginEvent.SignIn)
                     },
                         modifier = Modifier
                             .background(brush = Brush.horizontalGradient(

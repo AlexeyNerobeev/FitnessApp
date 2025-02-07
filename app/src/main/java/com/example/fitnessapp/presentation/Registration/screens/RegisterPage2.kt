@@ -21,6 +21,7 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -37,8 +38,12 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.presentation.WelcomeScreen.NavRoutes
 import com.example.fitnessapp.R
+import com.example.fitnessapp.data.profileData.AddProfile
+import com.example.fitnessapp.data.userData.GetUser
 import com.example.fitnessapp.presentation.Registration.models.RegisterVM
 import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @Preview
 @Composable
@@ -191,7 +196,7 @@ fun RegisterPage2(navController: NavController, vm: RegisterVM) {
                             .fillMaxWidth()
                     ) {
                         OutlinedTextField(
-                            value = "",
+                            value = vm.weight.toString(),
                             onValueChange = {
                                 vm.weight = it.toInt()
                             },
@@ -258,7 +263,7 @@ fun RegisterPage2(navController: NavController, vm: RegisterVM) {
                             .fillMaxWidth()
                     ) {
                         OutlinedTextField(
-                            value = "",
+                            value = vm.height.toString(),
                             onValueChange = {
                                 vm.height = it.toInt()
                             },
@@ -320,8 +325,16 @@ fun RegisterPage2(navController: NavController, vm: RegisterVM) {
                         }
                     }
                 }
+                val coroutine = rememberCoroutineScope()
                 Button(
                     onClick = {
+                        coroutine.launch(Dispatchers.IO) {
+                            val profile = AddProfile()
+                            val userId = GetUser()
+                            profile.addProfile(vm.fio,
+                                vm.height, vm.weight, vm.birthday, userId.getUserId(),
+                                vm.gender)
+                        }
                         navController.navigate(NavRoutes.Target1.route)
                     },
                     modifier = Modifier

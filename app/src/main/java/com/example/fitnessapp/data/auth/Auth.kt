@@ -12,7 +12,6 @@ import kotlinx.coroutines.withContext
 class Auth {
     suspend fun auth(inputEmail: String, inputPassword: String,
                      navController: NavController){
-        withContext(Dispatchers.Main){
             try{
                 val user = supabase.auth.signInWith(Email){
                     email = inputEmail
@@ -22,6 +21,5 @@ class Auth {
             } catch(ex: Exception){
                 Log.e("supa", ex.message.toString())
             }
-        }
     }
 }
