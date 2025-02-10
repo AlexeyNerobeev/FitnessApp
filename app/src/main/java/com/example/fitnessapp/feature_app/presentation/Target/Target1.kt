@@ -29,6 +29,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.R
 import com.example.fitnessapp.NavRoutes
+import com.example.fitnessapp.feature_app.presentation.Target.components.Card3
 import com.example.fitnessapp.presentation.Registration.screens.montserratBold
 import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
 
@@ -83,7 +84,7 @@ fun Target1(navController: NavController) {
                 )
                 Box(modifier = Modifier
                     .align(Alignment.Center)){
-                    Card1()
+                    Card3()
                 }
                 Box(modifier = Modifier
                     .align(Alignment.TopEnd)

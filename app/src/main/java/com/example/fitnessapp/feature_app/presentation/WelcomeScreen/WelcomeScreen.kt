@@ -1,9 +1,5 @@
 package com.example.fitnessapp.presentation.WelcomeScreen
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -36,7 +32,10 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.NavRoutes
 import com.example.fitnessapp.R
-import com.example.fitnessapp.data.sharedPreferences.SharedPreferences
+import com.example.fitnessapp.feature_app.data.repository.SharedPreferencesRepositoryImpl
+import com.example.fitnessapp.feature_app.presentation.WelcomeScreen.WelcomeEvent
+import com.example.fitnessapp.feature_app.presentation.WelcomeScreen.WelcomeVM
+import org.koin.androidx.compose.koinViewModel
 
 val montserratRegular = FontFamily(
     Font(
@@ -58,14 +57,15 @@ fun PrevWelcome(){
 }
 
 @Composable
-fun WelcomeScreen(navController: NavController) {
-    val prefs = SharedPreferences(LocalContext.current)
+fun WelcomeScreen(navController: NavController, vm: WelcomeVM = koinViewModel()) {
+    val state = vm.state.value
     Scaffold(modifier = Modifier
         .fillMaxSize()) { innerPadding ->
         Column(modifier = Modifier
             .padding(innerPadding)
             .fillMaxSize()
             .background(Color.White)) {
+            vm.onEvent(WelcomeEvent.GetNumber)
             Image(painter = painterResource(R.drawable.app_icon),
                 contentDescription = null,
                 modifier = Modifier
@@ -89,7 +89,7 @@ fun WelcomeScreen(navController: NavController) {
             Box(modifier = Modifier
                 .fillMaxSize()){
                 Button(onClick = {
-                    when (prefs.GetPreferences()) {
+                    when (state.number) {
                         0 -> navController.navigate(NavRoutes.OnBoarding1.route)
                         1 -> navController.navigate(NavRoutes.OnBoarding2.route)
                         2 -> navController.navigate(NavRoutes.OnBoarding3.route)

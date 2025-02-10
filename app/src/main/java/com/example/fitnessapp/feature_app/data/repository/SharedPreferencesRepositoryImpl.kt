@@ -1,9 +1,9 @@
-package com.example.fitnessapp.data.sharedPreferences
+package com.example.fitnessapp.feature_app.data.repository
 
 import android.content.Context
-import com.example.fitnessapp.feature_app.domain.sharedPrefs.SharedPrefsInterface
+import com.example.fitnessapp.feature_app.domain.repository.SharedPrefsRepository
 
-class SharedPreferences(context: Context): SharedPrefsInterface {
+class SharedPreferencesRepositoryImpl(context: Context): SharedPrefsRepository {
     val sharedPreferences = context
         .getSharedPreferences("OnBPrefs", Context.MODE_PRIVATE)
 

@@ -39,25 +39,25 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.NavRoutes
 import com.example.fitnessapp.R
-import com.example.fitnessapp.data.profileData.AddProfile
-import com.example.fitnessapp.data.userData.GetUser
+import com.example.fitnessapp.feature_app.presentation.RegistartionPage2.RegistrEvent2
+import com.example.fitnessapp.feature_app.presentation.RegistartionPage2.RegistrVM2
 import com.example.fitnessapp.feature_app.presentation.Registration.RegisterVM
 import com.example.fitnessapp.feature_app.presentation.Registration.RegistrEvent
 import com.example.fitnessapp.feature_app.presentation.Registration.RegistrState
 import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 
 @Preview
 @Composable
 fun PrevRegisterPage2(){
     val n = rememberNavController()
-    val vm = RegisterVM()
-    RegisterPage2(n, vm)
+    RegisterPage2(n)
 }
 
 @Composable
-fun RegisterPage2(navController: NavController, vm: RegisterVM) {
+fun RegisterPage2(navController: NavController, vm: RegistrVM2 = koinViewModel()) {
     val state = vm.state.value
     LaunchedEffect(key1 = !state.isComplete) {
         if(state.isComplete){
@@ -114,7 +114,7 @@ fun RegisterPage2(navController: NavController, vm: RegisterVM) {
                     OutlinedTextField(
                         value = state.gender,
                         onValueChange = {
-                            vm.onEvent(RegistrEvent.EnteredGender(it))
+                            vm.onEvent(RegistrEvent2.EnteredGender(it))
                         },
                         colors = OutlinedTextFieldDefaults.colors(
                             unfocusedBorderColor = colorResource(R.color.tfColor),
@@ -161,7 +161,7 @@ fun RegisterPage2(navController: NavController, vm: RegisterVM) {
                     OutlinedTextField(
                         value = state.birthday,
                         onValueChange = {
-                            vm.onEvent(RegistrEvent.EnteredBirthday(it))
+                            vm.onEvent(RegistrEvent2.EnteredBirthday(it))
                         },
                         colors = OutlinedTextFieldDefaults.colors(
                             unfocusedBorderColor = colorResource(R.color.tfColor),
@@ -205,7 +205,7 @@ fun RegisterPage2(navController: NavController, vm: RegisterVM) {
                         OutlinedTextField(
                             value = state.weight.toString(),
                             onValueChange = {
-                                vm.onEvent(RegistrEvent.EnteredWeight(it.toInt()))
+                                vm.onEvent(RegistrEvent2.EnteredWeight(it.toInt()))
                             },
                             colors = OutlinedTextFieldDefaults.colors(
                                 unfocusedBorderColor = colorResource(R.color.tfColor),
@@ -272,7 +272,7 @@ fun RegisterPage2(navController: NavController, vm: RegisterVM) {
                         OutlinedTextField(
                             value = state.height.toString(),
                             onValueChange = {
-                                vm.onEvent(RegistrEvent.EnteredHeight(it.toInt()))
+                                vm.onEvent(RegistrEvent2.EnteredHeight(it.toInt()))
                             },
                             colors = OutlinedTextFieldDefaults.colors(
                                 unfocusedBorderColor = colorResource(R.color.tfColor),
@@ -332,16 +332,9 @@ fun RegisterPage2(navController: NavController, vm: RegisterVM) {
                         }
                     }
                 }
-                val coroutine = rememberCoroutineScope()
                 Button(
                     onClick = {
-                        coroutine.launch(Dispatchers.IO) {
-                            val profile = AddProfile()
-                            val userId = GetUser()
-                            profile.addProfile(state.fio,
-                                state.height, state.weight, state.birthday, userId.getUserId(),
-                                state.gender)
-                        }
+                        vm.onEvent(RegistrEvent2.Registration)
                     },
                     modifier = Modifier
                         .padding(top = 30.dp)

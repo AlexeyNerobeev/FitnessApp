@@ -12,12 +12,7 @@ data class RegistrState(
     val password: String = "",
     val check: Boolean = false,
     val visual: Boolean = true,
-    val error: String = "",
     val isError: Boolean = false,
-    val gender: String = "",
-    val birthday: String = "",
-    val weight: Int = 0,
-    val height: Int = 0,
     val isComplete: Boolean = false,
     val errorMessage: String = ""
 )

@@ -33,22 +33,23 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.NavRoutes
 import com.example.fitnessapp.R
-import com.example.fitnessapp.data.sharedPreferences.SharedPreferences
+import com.example.fitnessapp.feature_app.data.repository.SharedPreferencesRepositoryImpl
+import com.example.fitnessapp.feature_app.presentation.OnBoard.OnBoardingEvent
 import com.example.fitnessapp.presentation.Registration.screens.montserratBold
 import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
+import org.koin.androidx.compose.koinViewModel
 
 @Preview
 @Composable
 fun PrevOnBoarding2() {
     val n = rememberNavController()
-    val vm = OnBoardVM()
-    OnBoarding2(n, vm)
+    OnBoarding2(n)
 }
 
 @Composable
-fun OnBoarding2(navController: NavController, vm: OnBoardVM) {
-    val prefs = SharedPreferences(LocalContext.current)
-    prefs.SavePreferences(2)
+fun OnBoarding2(navController: NavController, vm: OnBoardVM = koinViewModel()) {
+    val state = vm.state.value
+    vm.onEvent(OnBoardingEvent.ChangePref(2))
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Column(
             modifier = Modifier
@@ -58,9 +59,9 @@ fun OnBoarding2(navController: NavController, vm: OnBoardVM) {
                 .draggable(
                     orientation = Orientation.Horizontal,
                     state = rememberDraggableState { distance ->
-                        vm.swipe = distance <= -100
-                        if(vm.swipe)
-                            navController.navigate(NavRoutes.OnBoarding3 .route)
+                        vm.onEvent(OnBoardingEvent.Swipe(distance <= -100))
+                        if(state.swipe)
+                            navController.navigate(NavRoutes.OnBoarding3.route)
                     }
                 )
         ) {

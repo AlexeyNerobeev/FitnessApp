@@ -43,7 +43,6 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.NavRoutes
 import com.example.fitnessapp.R
-import com.example.fitnessapp.data.registration.Registration
 import com.example.fitnessapp.feature_app.domain.usecase.EmailValidationUseCase
 import com.example.fitnessapp.presentation.IncorrectEmailSnackBar.IncorrectEmailSnackBar
 import com.example.fitnessapp.feature_app.presentation.Registration.RegisterVM
@@ -51,6 +50,7 @@ import com.example.fitnessapp.feature_app.presentation.Registration.RegistrEvent
 import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
 import com.example.fitnessapp.presentation.WelcomeScreen.poppinsFont
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 
 val montserratBold = FontFamily(
     Font(
@@ -62,12 +62,11 @@ val montserratBold = FontFamily(
 @Composable
 fun PrevRegister(){
     val n = rememberNavController()
-    val vm = RegisterVM()
-    RegisterPage(n, vm)
+    RegisterPage(n)
 }
 
 @Composable
-fun RegisterPage(navController: NavController, vm: RegisterVM) {
+fun RegisterPage(navController: NavController, vm: RegisterVM = koinViewModel()) {
     val state = vm.state.value
     LaunchedEffect(key1 = !state.isComplete) {
         if(state.isComplete){
@@ -280,19 +279,11 @@ fun RegisterPage(navController: NavController, vm: RegisterVM) {
                     Column(modifier = Modifier
                         .align(Alignment.BottomCenter),
                         horizontalAlignment = Alignment.CenterHorizontally) {
-                        val coroutine = rememberCoroutineScope()
                         val emailCheck = EmailValidationUseCase()
                         Button(onClick = {
                             if(state.check){
                                 if(emailCheck.CheckEmail(state.email)){
-                                    coroutine.launch {
-                                        val registration = Registration()
-                                        registration.registration(
-                                            state.email,
-                                            state.password,
-                                            navController
-                                        )
-                                    }
+                                    vm.onEvent(RegistrEvent.Registration)
                                 } else{
                                     vm.onEvent(RegistrEvent.ChangeErrorMessage("Некорректная почта"))
                                 }
@@ -388,8 +379,8 @@ fun RegisterPage(navController: NavController, vm: RegisterVM) {
         Box(modifier = Modifier
             .fillMaxSize(),
             contentAlignment = Alignment.BottomCenter){
-            if(state.error.isNotEmpty()){
-                IncorrectEmailSnackBar(state.error)
+            if(state.errorMessage.isNotEmpty()){
+                IncorrectEmailSnackBar(state.errorMessage)
             }
         }
     }

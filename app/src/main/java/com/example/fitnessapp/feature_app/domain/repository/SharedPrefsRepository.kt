@@ -1,6 +1,6 @@
-package com.example.fitnessapp.feature_app.domain.sharedPrefs
+package com.example.fitnessapp.feature_app.domain.repository
 
-interface SharedPrefsInterface {
+interface SharedPrefsRepository {
     fun SavePreferences(number: Int)
 
     fun GetPreferences() : Int

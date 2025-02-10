@@ -6,8 +6,13 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.fitnessapp.feature_app.domain.usecase.RegistrUseCase
+import kotlinx.coroutines.launch
 
-class RegisterVM: ViewModel() {
+class RegisterVM(
+    private val registrUseCase: RegistrUseCase
+): ViewModel() {
     private val _state = mutableStateOf(RegistrState())
     val state: State<RegistrState> = _state
 
@@ -48,33 +53,19 @@ class RegisterVM: ViewModel() {
                     visual = !state.value.visual
                 )
             }
-            is RegistrEvent.EnteredGender ->{
-                _state.value = state.value.copy(
-                    gender = event.value
-                )
-            }
-            is RegistrEvent.EnteredWeight ->{
-                _state.value = state.value.copy(
-                    weight = event.value
-                )
-            }
-            is RegistrEvent.EnteredHeight ->{
-                _state.value = state.value.copy(
-                    height = event.value
-                )
-            }
             is RegistrEvent.IsComplete ->{
                 _state.value = state.value.copy(
                     isComplete = true
                 )
             }
-            is RegistrEvent.EnteredBirthday ->{
-                _state.value = state.value.copy(
-                    birthday = event.value
-                )
-            }
             RegistrEvent.Registration ->{
-
+                viewModelScope.launch {
+                    registrUseCase.invoke(state.value.email, state.value.password,
+                        state.value.fio, state.value.phone)
+                }
+                _state.value = state.value.copy(
+                    isComplete = true
+                )
             }
         }
     }
