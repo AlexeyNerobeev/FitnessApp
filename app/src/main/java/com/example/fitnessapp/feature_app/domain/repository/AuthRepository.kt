@@ -7,4 +7,6 @@ interface AuthRepository {
     suspend fun registration(inputEmail: String, inputPassword: String)
     suspend fun addFioNumber(fio: String, number: String)
     suspend fun addProfile(gender: String, birthday: String, weight: Int, height: Int)
+    suspend fun addTarget(target: String)
+    suspend fun getName(): String
 }

@@ -7,6 +7,7 @@ import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.auth.providers.builtin.Email
 import io.github.jan.supabase.postgrest.from
 import io.github.jan.supabase.postgrest.postgrest
+import io.github.jan.supabase.postgrest.query.Columns
 
 class AuthRepositoryImpl: AuthRepository {
     override suspend fun logIn(inputEmail: String, inputPassword: String) {
@@ -37,7 +38,7 @@ class AuthRepositoryImpl: AuthRepository {
     ) {
         val userId = supabase.auth.currentUserOrNull()?.id
         val profile = Profile(gender = gender, birthday = birthday, weight = weight,
-            height = height, user_id = userId.toString())
+            height = height)
         supabase.from("profile").update(profile){
             filter {
                 and {
@@ -45,5 +46,33 @@ class AuthRepositoryImpl: AuthRepository {
                 }
             }
         }
+    }
+
+    override suspend fun addTarget(target: String) {
+        val userId = supabase.auth.currentUserOrNull()?.id
+        val target = Profile(target = target)
+        supabase.from("profile").update(target){
+            filter{
+                and {
+                    eq("user_id", userId.toString())
+                }
+            }
+        }
+    }
+
+    override suspend fun getName(): String {
+        val userId = supabase.auth.currentUserOrNull()?.id.toString()
+        val name = supabase.postgrest["profile"].select(
+            columns = Columns.list(
+                "fio"
+            )
+        ){
+            filter {
+                and {
+                    eq("user_id", userId)
+                }
+            }
+        }.decodeSingle<String>()
+        return name
     }
 }

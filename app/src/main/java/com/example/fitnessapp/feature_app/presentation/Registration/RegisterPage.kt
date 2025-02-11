@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
@@ -24,7 +25,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -34,6 +34,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
@@ -49,7 +50,6 @@ import com.example.fitnessapp.feature_app.presentation.Registration.RegisterVM
 import com.example.fitnessapp.feature_app.presentation.Registration.RegistrEvent
 import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
 import com.example.fitnessapp.presentation.WelcomeScreen.poppinsFont
-import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
 val montserratBold = FontFamily(
@@ -137,6 +137,9 @@ fun RegisterPage(navController: NavController, vm: RegisterVM = koinViewModel())
                     onValueChange = {
                         vm.onEvent(RegistrEvent.EnteredNumber(it))
                     },
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Phone
+                    ),
                     shape = RoundedCornerShape(100.dp),
                     colors = OutlinedTextFieldDefaults.colors(
                         unfocusedBorderColor = colorResource(R.color.tfColor),

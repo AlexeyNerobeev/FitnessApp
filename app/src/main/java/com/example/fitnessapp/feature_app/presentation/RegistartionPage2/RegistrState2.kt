@@ -1,6 +1,5 @@
 package com.example.fitnessapp.feature_app.presentation.RegistartionPage2
 
-import com.example.fitnessapp.feature_app.presentation.Registration.RegistrEvent
 
 data class RegistrState2(
     val gender: String = "",

@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -22,7 +23,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -31,6 +31,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -41,12 +42,7 @@ import com.example.fitnessapp.NavRoutes
 import com.example.fitnessapp.R
 import com.example.fitnessapp.feature_app.presentation.RegistartionPage2.RegistrEvent2
 import com.example.fitnessapp.feature_app.presentation.RegistartionPage2.RegistrVM2
-import com.example.fitnessapp.feature_app.presentation.Registration.RegisterVM
-import com.example.fitnessapp.feature_app.presentation.Registration.RegistrEvent
-import com.example.fitnessapp.feature_app.presentation.Registration.RegistrState
 import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
 @Preview
@@ -203,7 +199,14 @@ fun RegisterPage2(navController: NavController, vm: RegistrVM2 = koinViewModel()
                             .fillMaxWidth()
                     ) {
                         OutlinedTextField(
-                            value = state.weight.toString(),
+                            value = if(state.weight == 0){
+                                ""
+                            } else{
+                                state.weight.toString()
+                            },
+                            keyboardOptions = KeyboardOptions(
+                                keyboardType = KeyboardType.Number
+                            ),
                             onValueChange = {
                                 vm.onEvent(RegistrEvent2.EnteredWeight(it.toInt()))
                             },
@@ -270,7 +273,14 @@ fun RegisterPage2(navController: NavController, vm: RegistrVM2 = koinViewModel()
                             .fillMaxWidth()
                     ) {
                         OutlinedTextField(
-                            value = state.height.toString(),
+                            value = if(state.height == 0){
+                                ""
+                            } else{
+                                state.height.toString()
+                            },
+                            keyboardOptions = KeyboardOptions(
+                                keyboardType = KeyboardType.Number
+                            ),
                             onValueChange = {
                                 vm.onEvent(RegistrEvent2.EnteredHeight(it.toInt()))
                             },

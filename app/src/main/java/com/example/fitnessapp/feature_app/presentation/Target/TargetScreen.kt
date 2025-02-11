@@ -1,6 +1,10 @@
 package com.example.fitnessapp.presentation.Target
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.draggable
+import androidx.compose.foundation.gestures.rememberDraggableState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,6 +19,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -29,19 +34,28 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.R
 import com.example.fitnessapp.NavRoutes
+import com.example.fitnessapp.feature_app.presentation.Target.TargetEvent
+import com.example.fitnessapp.feature_app.presentation.Target.components.Card2
 import com.example.fitnessapp.feature_app.presentation.Target.components.Card3
 import com.example.fitnessapp.presentation.Registration.screens.montserratBold
 import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
+import org.koin.androidx.compose.koinViewModel
 
 @Preview
 @Composable
-fun PrevTarget1(){
+fun PrevTarget(){
     val n = rememberNavController()
-    Target1(n)
+    TargetScreen(n)
 }
 
 @Composable
-fun Target1(navController: NavController) {
+fun TargetScreen(navController: NavController, vm: TargetVM = koinViewModel()) {
+    val state = vm.state.value
+    LaunchedEffect(key1 = !state.isComplete) {
+        if(state.isComplete){
+            navController.navigate(NavRoutes.SuccessRegistration.route)
+        }
+    }
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Column(Modifier.padding(innerPadding)
             .fillMaxSize()
@@ -81,10 +95,17 @@ fun Target1(navController: NavController) {
                         )
                     ), shape = RoundedCornerShape(22.dp))
                     .size(205.dp, 358.dp)
+                    .clickable {
+                        vm.onEvent(TargetEvent.TapLeft)
+                    }
                 )
                 Box(modifier = Modifier
                     .align(Alignment.Center)){
-                    Card3()
+                    when(state.cardNumber){
+                        1 -> Card1()
+                        2 -> Card2()
+                        3 -> Card3()
+                    }
                 }
                 Box(modifier = Modifier
                     .align(Alignment.TopEnd)
@@ -97,13 +118,16 @@ fun Target1(navController: NavController) {
                         )
                     ), shape = RoundedCornerShape(22.dp))
                     .size(205.dp, 358.dp)
+                    .clickable {
+                        vm.onEvent(TargetEvent.TapRight)
+                    }
                 )
             }
             Box(modifier = Modifier
                 .fillMaxSize(),
                 contentAlignment = Alignment.BottomCenter){
                 Button(onClick = {
-                    navController.navigate(NavRoutes.SuccessRegistration.route)
+                    vm.onEvent(TargetEvent.AddTarget)
                 },
                     modifier = Modifier
                         .padding(horizontal = 30.dp)
