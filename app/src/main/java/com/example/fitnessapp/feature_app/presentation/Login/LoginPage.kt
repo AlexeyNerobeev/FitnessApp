@@ -40,6 +40,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.NavRoutes
 import com.example.fitnessapp.R
+import com.example.fitnessapp.common.ErrorAlertDialog
 import com.example.fitnessapp.presentation.Registration.screens.montserratBold
 import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
 import com.example.fitnessapp.presentation.WelcomeScreen.poppinsFont
@@ -58,6 +59,11 @@ fun LoginPage(navController: NavController, vm: LoginVM = koinViewModel()) {
     LaunchedEffect(key1 = !state.isComplete) {
         if(state.isComplete){
             navController.navigate(NavRoutes.Home.route)
+        }
+    }
+    if(state.exception.isNotEmpty()){
+        ErrorAlertDialog(state.exception) {
+            vm.onEvent(LoginEvent.ExceptionClear)
         }
     }
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->

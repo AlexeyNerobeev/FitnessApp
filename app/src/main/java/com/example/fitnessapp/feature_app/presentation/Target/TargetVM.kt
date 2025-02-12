@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.fitnessapp.feature_app.domain.usecase.AddTargetUseCase
+import com.example.fitnessapp.feature_app.presentation.SuccessRegistartion.SuccessRegistrationEvent
 import com.example.fitnessapp.feature_app.presentation.Target.TargetEvent
 import com.example.fitnessapp.feature_app.presentation.Target.TargetState
 import kotlinx.coroutines.launch
@@ -41,14 +42,25 @@ class TargetVM(
             }
             TargetEvent.AddTarget ->{
                 viewModelScope.launch {
-                    when(state.value.cardNumber){
-                        1 -> addTargetUseCase.invoke("Улучшить форму")
-                        2 -> addTargetUseCase.invoke("Тонус")
-                        3 -> addTargetUseCase.invoke("Похудеть")
+                    try {
+                        when(state.value.cardNumber){
+                            1 -> addTargetUseCase.invoke("Улучшить форму")
+                            2 -> addTargetUseCase.invoke("Тонус")
+                            3 -> addTargetUseCase.invoke("Похудеть")
+                        }
+                        _state.value = state.value.copy(
+                            isComplete = true
+                        )
+                    } catch (ex: Exception){
+                        _state.value = state.value.copy(
+                            exception = ex.message.toString()
+                        )
                     }
                 }
+            }
+            TargetEvent.ClearException ->{
                 _state.value = state.value.copy(
-                    isComplete = true
+                    exception = ""
                 )
             }
         }

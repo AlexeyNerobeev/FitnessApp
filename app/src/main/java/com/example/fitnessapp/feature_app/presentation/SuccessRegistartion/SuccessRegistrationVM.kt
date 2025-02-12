@@ -1,5 +1,6 @@
 package com.example.fitnessapp.feature_app.presentation.SuccessRegistartion
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -16,11 +17,22 @@ class SuccessRegistrationVM(
     fun onEvent(event: SuccessRegistrationEvent){
         when(event){
             SuccessRegistrationEvent.GetName ->{
-                viewModelScope.launch {
+                try {
+                    viewModelScope.launch {
+                        _state.value = state.value.copy(
+                            name = getNameUseCase.invoke()
+                        )
+                    }
+                } catch (ex: Exception){
                     _state.value = state.value.copy(
-                        name = getNameUseCase.invoke()
+                        exception = ex.message.toString()
                     )
                 }
+            }
+            SuccessRegistrationEvent.ClearException -> {
+                _state.value = state.value.copy(
+                    exception = ""
+                )
             }
         }
     }

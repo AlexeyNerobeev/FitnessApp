@@ -28,7 +28,9 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.NavRoutes
 import com.example.fitnessapp.R
+import com.example.fitnessapp.common.ErrorAlertDialog
 import com.example.fitnessapp.feature_app.presentation.Registration.RegisterVM
+import com.example.fitnessapp.feature_app.presentation.SuccessRegistartion.SuccessRegistrationEvent
 import com.example.fitnessapp.feature_app.presentation.SuccessRegistartion.SuccessRegistrationVM
 import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
 import org.koin.androidx.compose.koinViewModel
@@ -43,6 +45,12 @@ fun PrevSuccessReg(){
 @Composable
 fun SuccessRegistration(navController: NavController, vm: SuccessRegistrationVM = koinViewModel()) {
     val state = vm.state.value
+    vm.onEvent(SuccessRegistrationEvent.GetName)
+    if (state.exception.isNotEmpty()){
+        ErrorAlertDialog(state.exception) {
+            vm.onEvent(SuccessRegistrationEvent.ClearException)
+        }
+    }
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Column(modifier = Modifier
             .background(Color.White)
@@ -56,7 +64,7 @@ fun SuccessRegistration(navController: NavController, vm: SuccessRegistrationVM 
                 .padding(top = 44.dp)
                 .padding(horizontal = 79.dp),
                 horizontalAlignment = Alignment.CenterHorizontally){
-                Text(text = "Добро пожаловать, \n${state.name}",
+                Text(text = "Добро пожаловать,\n${state.name}",
                     color = Color.Black,
                     fontSize = 20.sp,
                     fontFamily = montserratBold,

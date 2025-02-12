@@ -14,5 +14,6 @@ data class RegistrState(
     val visual: Boolean = true,
     val isError: Boolean = false,
     val isComplete: Boolean = false,
-    val errorMessage: String = ""
+    val errorMessage: String = "",
+    val exception: String = ""
 )

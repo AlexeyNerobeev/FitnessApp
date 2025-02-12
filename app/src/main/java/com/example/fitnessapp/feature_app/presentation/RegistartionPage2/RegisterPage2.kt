@@ -2,6 +2,8 @@ package com.example.fitnessapp.presentation.Registration.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,6 +18,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -40,6 +43,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.NavRoutes
 import com.example.fitnessapp.R
+import com.example.fitnessapp.common.ErrorAlertDialog
 import com.example.fitnessapp.feature_app.presentation.RegistartionPage2.RegistrEvent2
 import com.example.fitnessapp.feature_app.presentation.RegistartionPage2.RegistrVM2
 import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
@@ -57,7 +61,12 @@ fun RegisterPage2(navController: NavController, vm: RegistrVM2 = koinViewModel()
     val state = vm.state.value
     LaunchedEffect(key1 = !state.isComplete) {
         if(state.isComplete){
-            navController.navigate(NavRoutes.Target1.route)
+            navController.navigate(NavRoutes.Target.route)
+        }
+    }
+    if(state.exception.isNotEmpty()){
+        ErrorAlertDialog(state.exception) {
+            vm.onEvent(RegistrEvent2.ClearException)
         }
     }
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
@@ -110,7 +119,7 @@ fun RegisterPage2(navController: NavController, vm: RegistrVM2 = koinViewModel()
                     OutlinedTextField(
                         value = state.gender,
                         onValueChange = {
-                            vm.onEvent(RegistrEvent2.EnteredGender(it))
+
                         },
                         colors = OutlinedTextFieldDefaults.colors(
                             unfocusedBorderColor = colorResource(R.color.tfColor),
@@ -149,7 +158,38 @@ fun RegisterPage2(navController: NavController, vm: RegistrVM2 = koinViewModel()
                                 modifier = Modifier
                                     .padding(end = 15.dp)
                                     .padding(vertical = 15.dp)
+                                    .clickable {
+                                        vm.onEvent(RegistrEvent2.DropMenu)
+                                    }
                             )
+                            DropdownMenu(expanded = state.expanded,
+                                onDismissRequest = {
+                                    vm.onEvent(RegistrEvent2.DropMenu)
+                                },
+                                modifier = Modifier
+                                    .background(Color.White)
+                                    .border(1.dp, Color.LightGray)) {
+                                Text("Мужской",
+                                    color = Color.Black,
+                                    fontSize = 18.sp,
+                                    fontFamily = montserratRegular,
+                                    modifier = Modifier
+                                        .padding(5.dp)
+                                        .clickable {
+                                            vm.onEvent(RegistrEvent2.SelectGender("Мужской"))
+                                            vm.onEvent(RegistrEvent2.DropMenu)
+                                        })
+                                Text("Женский",
+                                    color = Color.Black,
+                                    fontSize = 18.sp,
+                                    fontFamily = montserratRegular,
+                                    modifier = Modifier
+                                        .padding(5.dp)
+                                        .clickable {
+                                            vm.onEvent(RegistrEvent2.SelectGender("Женский"))
+                                            vm.onEvent(RegistrEvent2.DropMenu)
+                                        })
+                            }
                         },
                         shape = RoundedCornerShape(100.dp),
                         modifier = Modifier.fillMaxWidth()
@@ -159,6 +199,9 @@ fun RegisterPage2(navController: NavController, vm: RegistrVM2 = koinViewModel()
                         onValueChange = {
                             vm.onEvent(RegistrEvent2.EnteredBirthday(it))
                         },
+                        keyboardOptions = KeyboardOptions(
+                            keyboardType = KeyboardType.Number
+                        ),
                         colors = OutlinedTextFieldDefaults.colors(
                             unfocusedBorderColor = colorResource(R.color.tfColor),
                             focusedBorderColor = colorResource(R.color.tfColor),

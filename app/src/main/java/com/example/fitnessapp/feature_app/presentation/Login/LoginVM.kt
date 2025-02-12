@@ -1,5 +1,6 @@
 package com.example.fitnessapp.presentation.Login
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -24,10 +25,17 @@ class LoginVM(
         when (event){
             LoginEvent.SignIn -> {
                 viewModelScope.launch(Dispatchers.IO) {
-                    loginUseCase.invoke(state.value.email, state.value.password)
-                    _state.value = state.value.copy(
-                        isComplete = true
-                    )
+                    try {
+                        loginUseCase.invoke(state.value.email, state.value.password)
+                        _state.value = state.value.copy(
+                            isComplete = true
+                        )
+                    } catch (ex: Exception){
+                        _state.value = state.value.copy(
+                            exception = ex.message.toString()
+                        )
+                        Log.e("supa", ex.message.toString())
+                    }
                 }
             }
             is LoginEvent.EnteredEmail -> {
@@ -42,7 +50,12 @@ class LoginVM(
             }
             is LoginEvent.VisualTransformation ->{
                 _state.value = state.value.copy(
-                    visual = false
+                    visual = !state.value.visual
+                )
+            }
+            LoginEvent.ExceptionClear ->{
+                _state.value = state.value.copy(
+                    exception = ""
                 )
             }
         }

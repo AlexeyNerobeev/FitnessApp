@@ -6,5 +6,7 @@ data class RegistrState2(
     val birthday: String = "",
     val weight: Int = 0,
     val height: Int = 0,
-    val isComplete: Boolean = false
+    val isComplete: Boolean = false,
+    val expanded: Boolean = false,
+    val exception: String = ""
 )

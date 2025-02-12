@@ -9,7 +9,7 @@ sealed class NavRoutes(val route: String){
     object RegisterPage: NavRoutes("RegisterPage")
     object LoginPage: NavRoutes("LoginPage")
     object RegisterPage2: NavRoutes("RegisterPage2")
-    object Target1: NavRoutes("Target1")
+    object Target: NavRoutes("Target")
     object SuccessRegistration: NavRoutes("SuccessRegistration")
     object Home: NavRoutes("Home")
 }

@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
@@ -40,8 +41,7 @@ fun Card1() {
         ), shape = RoundedCornerShape(22.dp)
         )){
         Column(modifier = Modifier
-            .padding(top = 35.dp)
-            .fillMaxWidth(),
+            .padding(top = 35.dp),
             horizontalAlignment = Alignment.CenterHorizontally) {
             Image(painter = painterResource(R.drawable.card1_art),
                 contentDescription = null,

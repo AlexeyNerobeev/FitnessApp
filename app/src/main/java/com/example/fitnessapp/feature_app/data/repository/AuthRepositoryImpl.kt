@@ -61,7 +61,7 @@ class AuthRepositoryImpl: AuthRepository {
     }
 
     override suspend fun getName(): String {
-        val userId = supabase.auth.currentUserOrNull()?.id.toString()
+        val userId = supabase.auth.currentUserOrNull()?.id
         val name = supabase.postgrest["profile"].select(
             columns = Columns.list(
                 "fio"
@@ -69,10 +69,10 @@ class AuthRepositoryImpl: AuthRepository {
         ){
             filter {
                 and {
-                    eq("user_id", userId)
+                    eq("user_id", userId.toString())
                 }
             }
-        }.decodeSingle<String>()
-        return name
+        }.decodeSingle<Profile>()
+        return name.fio
     }
 }

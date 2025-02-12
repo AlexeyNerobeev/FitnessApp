@@ -44,6 +44,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.NavRoutes
 import com.example.fitnessapp.R
+import com.example.fitnessapp.common.ErrorAlertDialog
 import com.example.fitnessapp.feature_app.domain.usecase.EmailValidationUseCase
 import com.example.fitnessapp.presentation.IncorrectEmailSnackBar.IncorrectEmailSnackBar
 import com.example.fitnessapp.feature_app.presentation.Registration.RegisterVM
@@ -71,6 +72,11 @@ fun RegisterPage(navController: NavController, vm: RegisterVM = koinViewModel())
     LaunchedEffect(key1 = !state.isComplete) {
         if(state.isComplete){
             navController.navigate(NavRoutes.RegisterPage2.route)
+        }
+    }
+    if(state.exception.isNotEmpty()){
+        ErrorAlertDialog(state.exception) {
+            vm.onEvent(RegistrEvent.ClearException)
         }
     }
     Scaffold(modifier = Modifier

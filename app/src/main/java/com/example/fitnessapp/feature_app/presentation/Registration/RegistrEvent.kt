@@ -12,4 +12,5 @@ sealed class RegistrEvent{
     data class ChangeErrorMessage(val value: String): RegistrEvent()
     data object VisualTransformation: RegistrEvent()
     data class IsComplete(val value: Boolean): RegistrEvent()
+    data object ClearException: RegistrEvent()
 }

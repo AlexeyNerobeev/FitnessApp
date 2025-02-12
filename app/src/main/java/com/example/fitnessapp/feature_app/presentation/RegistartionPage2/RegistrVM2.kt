@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.fitnessapp.feature_app.domain.usecase.Registr2UseCase
 import com.example.fitnessapp.feature_app.domain.usecase.RegistrUseCase
 import com.example.fitnessapp.feature_app.presentation.Registration.RegistrEvent
+import com.example.fitnessapp.presentation.Login.LoginEvent
 import kotlinx.coroutines.launch
 
 class RegistrVM2(
@@ -17,11 +18,6 @@ class RegistrVM2(
 
     fun onEvent(event: RegistrEvent2){
         when(event){
-            is RegistrEvent2.EnteredGender ->{
-                _state.value = state.value.copy(
-                    gender = event.value
-                )
-            }
             is RegistrEvent2.EnteredBirthday ->{
                 _state.value = state.value.copy(
                     birthday = event.value
@@ -39,11 +35,32 @@ class RegistrVM2(
             }
             RegistrEvent2.Registration ->{
                 viewModelScope.launch {
-                    registr2UseCase.invoke(state.value.gender, state.value.birthday,
-                        state.value.weight, state.value.height)
+                    try {
+                        registr2UseCase.invoke(state.value.gender, state.value.birthday,
+                            state.value.weight, state.value.height)
+                        _state.value = state.value.copy(
+                            isComplete = true
+                        )
+                    } catch (ex: Exception){
+                        _state.value = state.value.copy(
+                            exception = ex.message.toString()
+                        )
+                    }
                 }
+            }
+            RegistrEvent2.DropMenu -> {
                 _state.value = state.value.copy(
-                    isComplete = true
+                    expanded = !state.value.expanded
+                )
+            }
+            is RegistrEvent2.SelectGender -> {
+                _state.value = state.value.copy(
+                    gender = event.value
+                )
+            }
+            RegistrEvent2.ClearException -> {
+                _state.value = state.value.copy(
+                    exception = ""
                 )
             }
         }

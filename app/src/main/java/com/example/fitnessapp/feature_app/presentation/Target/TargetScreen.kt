@@ -34,6 +34,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.R
 import com.example.fitnessapp.NavRoutes
+import com.example.fitnessapp.common.ErrorAlertDialog
 import com.example.fitnessapp.feature_app.presentation.Target.TargetEvent
 import com.example.fitnessapp.feature_app.presentation.Target.components.Card2
 import com.example.fitnessapp.feature_app.presentation.Target.components.Card3
@@ -56,14 +57,18 @@ fun TargetScreen(navController: NavController, vm: TargetVM = koinViewModel()) {
             navController.navigate(NavRoutes.SuccessRegistration.route)
         }
     }
+    if(state.exception.isNotEmpty()){
+        ErrorAlertDialog(state.exception) {
+            vm.onEvent(TargetEvent.ClearException)
+        }
+    }
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Column(Modifier.padding(innerPadding)
             .fillMaxSize()
-            .background(Color.White)) {
+            .background(Color.White),
+            horizontalAlignment = Alignment.CenterHorizontally) {
             Column(modifier = Modifier
-                .padding(top = 40.dp)
-                .padding(start = 90.dp)
-                .padding(end = 78.dp),
+                .padding(top = 20.dp),
                 horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(text = "Какова ваша цель?",
                     color = Color.Black,
@@ -72,7 +77,7 @@ fun TargetScreen(navController: NavController, vm: TargetVM = koinViewModel()) {
                     fontWeight = FontWeight(700),
                     textAlign = TextAlign.Center
                 )
-                Text(text = "Это поможет нам подобрать для вас лучшую программу.",
+                Text(text = "Это поможет нам подобрать\nдля вас лучшую программу.",
                     color = Color.Black,
                     fontSize = 12.sp,
                     fontWeight = FontWeight(400),
@@ -83,11 +88,12 @@ fun TargetScreen(navController: NavController, vm: TargetVM = koinViewModel()) {
                )
             }
             Box(modifier = Modifier
-                .padding(top = 50.dp)
+                .padding(top = 30.dp)
                 .fillMaxWidth()) {
                 Box(modifier = Modifier
                     .offset(x = (-175).dp)
-                    .padding(top = 90.dp)
+                    .align(Alignment.BottomStart)
+                    .padding(bottom = 30.dp)
                     .background(brush = Brush.horizontalGradient(
                         colors = listOf(
                             colorResource(R.color.startGradient),
@@ -100,7 +106,7 @@ fun TargetScreen(navController: NavController, vm: TargetVM = koinViewModel()) {
                     }
                 )
                 Box(modifier = Modifier
-                    .align(Alignment.Center)){
+                    .align(Alignment.TopCenter)){
                     when(state.cardNumber){
                         1 -> Card1()
                         2 -> Card2()
@@ -108,9 +114,9 @@ fun TargetScreen(navController: NavController, vm: TargetVM = koinViewModel()) {
                     }
                 }
                 Box(modifier = Modifier
-                    .align(Alignment.TopEnd)
+                    .align(Alignment.BottomEnd)
                     .offset(x = 175.dp)
-                    .padding(top = 90.dp)
+                    .padding(bottom = 30.dp)
                     .background(brush = Brush.horizontalGradient(
                         colors = listOf(
                             colorResource(R.color.endGradient),
@@ -123,6 +129,7 @@ fun TargetScreen(navController: NavController, vm: TargetVM = koinViewModel()) {
                     }
                 )
             }
+        }
             Box(modifier = Modifier
                 .fillMaxSize(),
                 contentAlignment = Alignment.BottomCenter){
@@ -153,6 +160,5 @@ fun TargetScreen(navController: NavController, vm: TargetVM = koinViewModel()) {
                    )
                 }
             }
-        }
     }
 }

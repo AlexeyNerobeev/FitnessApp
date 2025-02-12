@@ -24,9 +24,6 @@ import com.example.fitnessapp.ui.theme.FitnessAppTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        window.decorView.apply {
-//            systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-//        }
         setContent {
             FitnessAppTheme {
                 val navController = rememberNavController()
@@ -39,7 +36,7 @@ class MainActivity : ComponentActivity() {
                     composable(NavRoutes.RegisterPage.route){ RegisterPage(navController) }
                     composable(NavRoutes.LoginPage.route){ LoginPage(navController) }
                     composable(NavRoutes.RegisterPage2.route){ RegisterPage2(navController) }
-                    composable(NavRoutes.Target1.route){ TargetScreen(navController) }
+                    composable(NavRoutes.Target.route){ TargetScreen(navController) }
                     composable(NavRoutes.SuccessRegistration.route){ SuccessRegistration(navController) }
                     composable(NavRoutes.Home.route){ HomeScreen(navController) }
                 }

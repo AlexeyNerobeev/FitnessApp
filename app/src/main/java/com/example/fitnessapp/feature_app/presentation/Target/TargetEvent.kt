@@ -4,4 +4,5 @@ sealed class TargetEvent {
     data object TapRight: TargetEvent()
     data object TapLeft: TargetEvent()
     data object AddTarget: TargetEvent()
+    data object ClearException: TargetEvent()
 }

@@ -8,6 +8,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.fitnessapp.feature_app.domain.usecase.RegistrUseCase
+import com.example.fitnessapp.feature_app.presentation.RegistartionPage2.RegistrEvent2
 import kotlinx.coroutines.launch
 
 class RegisterVM(
@@ -60,11 +61,22 @@ class RegisterVM(
             }
             RegistrEvent.Registration ->{
                 viewModelScope.launch {
-                    registrUseCase.invoke(state.value.email, state.value.password,
-                        state.value.fio, state.value.phone)
+                    try {
+                        registrUseCase.invoke(state.value.email, state.value.password,
+                            state.value.fio, state.value.phone)
+                        _state.value = state.value.copy(
+                            isComplete = true
+                        )
+                    } catch (ex: Exception){
+                        _state.value = state.value.copy(
+                            exception = ex.message.toString()
+                        )
+                    }
                 }
+            }
+            RegistrEvent.ClearException -> {
                 _state.value = state.value.copy(
-                    isComplete = true
+                    exception = ""
                 )
             }
         }
