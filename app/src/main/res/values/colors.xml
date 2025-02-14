@@ -22,4 +22,6 @@
     <color name="mealPlannerBG">#DEF2EE</color>
     <color name="mealPlannerButton">#68C6B6</color>
     <color name="HomeWelcome">#A5A3B0</color>
+    <color name="todayTarget">#5CBDAC</color>
+    <color name="homeGradient">#1D242A0D</color>
 </resources>
