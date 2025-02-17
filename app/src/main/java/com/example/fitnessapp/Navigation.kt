@@ -12,4 +12,6 @@ sealed class NavRoutes(val route: String){
     object Target: NavRoutes("Target")
     object SuccessRegistration: NavRoutes("SuccessRegistration")
     object Home: NavRoutes("Home")
+    object Notifications: NavRoutes("Notifications")
+    object ActivityTracker: NavRoutes("ActivityTracker")
 }

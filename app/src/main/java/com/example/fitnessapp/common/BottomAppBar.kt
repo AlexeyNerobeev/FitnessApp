@@ -4,10 +4,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -60,7 +62,10 @@ fun BottomAppBar(navController: NavController, activityNumber: Int) {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Row(verticalAlignment = Alignment.Top){
+                Row(modifier = Modifier
+                    .fillMaxWidth(),
+                    verticalAlignment = Alignment.Top,
+                    horizontalArrangement = Arrangement.SpaceBetween){
                     IconButton(
                         onClick = {
                             if (activityNumber != 1){
@@ -75,18 +80,16 @@ fun BottomAppBar(navController: NavController, activityNumber: Int) {
                     }
                     IconButton(onClick = {
                         if(activityNumber != 2){
-
+                            navController.navigate(NavRoutes.ActivityTracker.route)
                         }
-                    },
-                        modifier = Modifier
-                            .padding(start = 38.dp)) {
+                    }) {
                         Icon(painter = painterResource(R.drawable.activity_icon),
                             contentDescription = null,
                             tint = Color.Unspecified
                         )
                     }
-                }
-                Row(verticalAlignment = Alignment.Top){
+                Spacer(modifier = Modifier
+                    .width(60.dp))
                     IconButton(onClick = {
 
                     }) {
@@ -96,9 +99,7 @@ fun BottomAppBar(navController: NavController, activityNumber: Int) {
                     }
                     IconButton(onClick = {
 
-                    },
-                         modifier = Modifier
-                             .padding(start = 38.dp)) {
+                    }) {
                         Icon(painter = profileIcon,
                             contentDescription = null,
                             tint = Color.Unspecified)

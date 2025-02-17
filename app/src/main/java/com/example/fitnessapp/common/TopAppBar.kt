@@ -4,9 +4,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -39,11 +41,8 @@ fun TopAppBar(navController: NavController, activityName: String, titleColor: Co
         verticalAlignment = Alignment.CenterVertically) {
         IconButton(onClick = {
             navController.popBackStack()
-        },
-            modifier = Modifier
-                .background(colorResource(R.color.tfColor),
-                    shape = RoundedCornerShape(8.dp))) {
-            Icon(painter = painterResource(R.drawable.arrow_left),
+        }) {
+            Icon(painter = painterResource(R.drawable.back_icon),
                 contentDescription = null,
                 tint = Color.Unspecified)
         }
@@ -55,11 +54,8 @@ fun TopAppBar(navController: NavController, activityName: String, titleColor: Co
         )
         IconButton(onClick = {
 
-        },
-            modifier = Modifier
-                .background(colorResource(R.color.tfColor),
-                    shape = RoundedCornerShape(8.dp))) {
-            Icon(painter = painterResource(R.drawable.more_icon),
+        }) {
+            Icon(painter = painterResource(R.drawable.details_icon),
                 contentDescription = null,
                 tint = Color.Unspecified)
         }

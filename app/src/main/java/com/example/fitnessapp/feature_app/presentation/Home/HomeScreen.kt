@@ -51,9 +51,11 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import co.yml.charts.common.model.PlotData
 import co.yml.charts.common.model.PlotType
+import co.yml.charts.common.utils.DataUtils
 import co.yml.charts.ui.piechart.charts.PieChart
 import co.yml.charts.ui.piechart.models.PieChartConfig
 import co.yml.charts.ui.piechart.models.PieChartData
+import com.example.fitnessapp.NavRoutes
 import com.example.fitnessapp.R
 import com.example.fitnessapp.common.BottomAppBar
 import com.example.fitnessapp.presentation.Registration.screens.montserratBold
@@ -108,11 +110,12 @@ fun HomeScreen(navController: NavController) {
                     )
                     .size(40.dp, 42.dp)
                     .clickable {
-
+                        navController.navigate(NavRoutes.Notifications.route)
                     }) {
                     Icon(
                         painter = painterResource(R.drawable.notification_icon),
                         contentDescription = null,
+                        tint = Color.Unspecified,
                         modifier = Modifier
                             .align(Alignment.BottomCenter)
                     )
@@ -193,39 +196,36 @@ fun HomeScreen(navController: NavController) {
                                     )
                                 }
                             }
-                            Image(
-                                painter = painterResource(R.drawable.pie_chart),
-                                contentDescription = null,
-                                modifier = Modifier
-                                    .align(Alignment.CenterVertically)
-                            )
-//                            val pieChartData = PieChartData(
-//                                slices = listOf(
-//                                    PieChartData.Slice("ИМТ",
-//                                        20.1f,
-//                                        colorResource(R.color.startGradient)
-//                                    ),
-//                                    PieChartData.Slice("Other",
-//                                        79.9f,
-//                                        Color.Blue)
-//                                ),
-//                                plotType = PlotType.Pie
-//                            )
-//                            val pieChartConfig = PieChartConfig(
-//                                labelVisible = false,
-//                                activeSliceAlpha = .9f,
-//                                isEllipsizeEnabled = true,
-//                                backgroundColor = Color.Transparent,
-//                                showSliceLabels = false,
-//                                chartPadding = 0
-//                            )
-//                            PieChart(
+//                            Image(
+//                                painter = painterResource(R.drawable.pie_chart),
+//                                contentDescription = null,
 //                                modifier = Modifier
-//                                    .padding(vertical = 29.dp)
-//                                    .size(88.dp),
-//                                pieChartData,
-//                                pieChartConfig
+//                                    .align(Alignment.CenterVertically)
 //                            )
+                            val pieChartData = PieChartData(
+                                slices = listOf(
+                                    PieChartData.Slice("20.1",
+                                        20.1f,
+                                        colorResource(R.color.startGradient)
+                                    ),
+                                    PieChartData.Slice("",
+                                        79.9f,
+                                        Color.White)
+                                ),
+                                plotType = PlotType.Pie
+                            )
+                            val pieChartConfig = PieChartConfig(
+                                showSliceLabels = true,
+                                backgroundColor = colorResource(R.color.startGradient),
+                                labelVisible = false
+                            )
+                            PieChart(
+                                modifier = Modifier
+                                    .padding(vertical = 29.dp)
+                                    .size(88.dp),
+                                pieChartData,
+                                pieChartConfig
+                            )
                         }
                     }
                     Box(

@@ -8,6 +8,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.fitnessapp.feature_app.presentation.ActivityTracker.ActivityTrackerScreen
+import com.example.fitnessapp.feature_app.presentation.Notification.NotificationScreen
 import com.example.fitnessapp.presentation.Home.HomeScreen
 import com.example.fitnessapp.presentation.Login.LoginPage
 import com.example.fitnessapp.presentation.OnBoard.OnBoarding1
@@ -39,6 +41,8 @@ class MainActivity : ComponentActivity() {
                     composable(NavRoutes.Target.route){ TargetScreen(navController) }
                     composable(NavRoutes.SuccessRegistration.route){ SuccessRegistration(navController) }
                     composable(NavRoutes.Home.route){ HomeScreen(navController) }
+                    composable(NavRoutes.Notifications.route){ NotificationScreen(navController)}
+                    composable(NavRoutes.ActivityTracker.route){ ActivityTrackerScreen(navController)}
                 }
             }
         }
