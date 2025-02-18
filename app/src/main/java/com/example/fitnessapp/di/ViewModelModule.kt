@@ -1,5 +1,6 @@
 package com.example.fitnessapp.di
 
+import com.example.fitnessapp.feature_app.presentation.Profile.ProfileVM
 import com.example.fitnessapp.feature_app.presentation.RegistartionPage2.RegistrVM2
 import com.example.fitnessapp.feature_app.presentation.Registration.RegisterVM
 import com.example.fitnessapp.feature_app.presentation.SuccessRegistartion.SuccessRegistrationVM
@@ -32,5 +33,8 @@ val moduleVM = module {
     }
     viewModel<SuccessRegistrationVM>{
         SuccessRegistrationVM(get())
+    }
+    viewModel<ProfileVM>{
+        ProfileVM()
     }
 }
