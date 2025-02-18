@@ -15,8 +15,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -26,16 +24,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -44,6 +37,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.R
 import com.example.fitnessapp.common.TopAppBar
+import com.example.fitnessapp.feature_app.presentation.ActivityTracker.components.BarChartActivityTracker
 import com.example.fitnessapp.presentation.Registration.screens.montserratBold
 import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
 import com.example.fitnessapp.presentation.WelcomeScreen.poppinsFont
@@ -235,7 +229,6 @@ fun ActivityTrackerScreen(navController: NavController) {
 
                         },
                         modifier = Modifier
-                            .size(76.dp, 30.dp)
                             .background(
                                 Brush.horizontalGradient(
                                     colors = listOf(
@@ -244,7 +237,8 @@ fun ActivityTrackerScreen(navController: NavController) {
                                     )
                                 ),
                                 shape = RoundedCornerShape(50.dp)
-                            ),
+                            )
+                            .size(76.dp, 30.dp),
                         colors = ButtonDefaults.buttonColors(
                             contentColor = Color.White,
                             containerColor = Color.Transparent
@@ -266,14 +260,15 @@ fun ActivityTrackerScreen(navController: NavController) {
                         }
                     }
                 }
-                Image(
-                    painter = painterResource(R.drawable.graph_activity_tracker),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .padding(top = 15.dp)
-                        .fillMaxWidth()
-                        .height(200.dp)
-                )
+                        BarChartActivityTracker()
+//                Image(
+//                    painter = painterResource(R.drawable.graph_activity_tracker),
+//                    contentDescription = null,
+//                    modifier = Modifier
+//                        .padding(top = 15.dp)
+//                        .fillMaxWidth()
+//                        .height(200.dp)
+//                )
                 Row(
                     modifier = Modifier
                         .padding(top = 30.dp)

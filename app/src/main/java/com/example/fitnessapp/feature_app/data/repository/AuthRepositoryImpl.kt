@@ -25,8 +25,7 @@ class AuthRepositoryImpl: AuthRepository {
     }
 
     override suspend fun addFioNumber(fio: String, number: String) {
-        val userId = supabase.auth.currentUserOrNull()?.id
-        val profile = Profile(fio = fio, phone = number, user_id = userId.toString())
+        val profile = Profile(fio = fio, phone = number, user_id = getUserId())
         supabase.postgrest["profile"].insert(profile)
     }
 
@@ -36,32 +35,29 @@ class AuthRepositoryImpl: AuthRepository {
         weight: Int,
         height: Int
     ) {
-        val userId = supabase.auth.currentUserOrNull()?.id
         val profile = Profile(gender = gender, birthday = birthday, weight = weight,
             height = height)
         supabase.from("profile").update(profile){
             filter {
                 and {
-                    eq("user_id", userId.toString())
+                    eq("user_id", getUserId())
                 }
             }
         }
     }
 
     override suspend fun addTarget(target: String) {
-        val userId = supabase.auth.currentUserOrNull()?.id
         val target = Profile(target = target)
         supabase.from("profile").update(target){
             filter{
                 and {
-                    eq("user_id", userId.toString())
+                    eq("user_id", getUserId())
                 }
             }
         }
     }
 
     override suspend fun getName(): String {
-        val userId = supabase.auth.currentUserOrNull()?.id
         val name = supabase.postgrest["profile"].select(
             columns = Columns.list(
                 "fio"
@@ -69,10 +65,15 @@ class AuthRepositoryImpl: AuthRepository {
         ){
             filter {
                 and {
-                    eq("user_id", userId.toString())
+                    eq("user_id", getUserId())
                 }
             }
         }.decodeSingle<Profile>()
         return name.fio
+    }
+
+    private suspend fun getUserId() : String{
+        supabase.auth.awaitInitialization()
+        return supabase.auth.currentUserOrNull()?.id ?: ""
     }
 }

@@ -1,7 +1,7 @@
 package com.example.fitnessapp
 
 sealed class NavRoutes(val route: String){
-    object WelcomeScreen: NavRoutes("WelcomeScreen")
+    data object WelcomeScreen: NavRoutes("WelcomeScreen")
     object OnBoarding1: NavRoutes("OnBoarding1")
     object OnBoarding2: NavRoutes("OnBoarding2")
     object OnBoarding3: NavRoutes("OnBoarding3")
