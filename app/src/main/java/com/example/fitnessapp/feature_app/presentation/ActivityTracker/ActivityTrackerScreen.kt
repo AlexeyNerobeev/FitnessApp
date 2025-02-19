@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -24,8 +25,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.motionEventSpy
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -33,6 +36,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.R
@@ -41,6 +45,7 @@ import com.example.fitnessapp.feature_app.presentation.ActivityTracker.component
 import com.example.fitnessapp.presentation.Registration.screens.montserratBold
 import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
 import com.example.fitnessapp.presentation.WelcomeScreen.poppinsFont
+import org.koin.androidx.compose.koinViewModel
 
 @Preview
 @Composable
@@ -49,7 +54,9 @@ fun PrevActivityTrackerScreen() {
 }
 
 @Composable
-fun ActivityTrackerScreen(navController: NavController) {
+fun ActivityTrackerScreen(navController: NavController, vm: ActivityTrackerVM = koinViewModel()) {
+    val state = vm.state.value
+    vm.onEvent(ActivityTrackerEvent.GetTodayTarget)
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Column(
             modifier = Modifier
@@ -112,12 +119,11 @@ fun ActivityTrackerScreen(navController: NavController) {
                             modifier = Modifier
                                 .padding(top = 15.dp)
                                 .padding(bottom = 20.dp)
-                                .fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
+                                .fillMaxWidth()
                         ) {
                             Box(
                                 modifier = Modifier
-                                    .width(110.dp)
+                                    .weight(1f)
                                     .background(
                                         Color.White,
                                         shape = RoundedCornerShape(12.dp)
@@ -138,7 +144,7 @@ fun ActivityTrackerScreen(navController: NavController) {
                                             .padding(start = 8.dp)
                                     ) {
                                         Text(
-                                            text = "8Л",
+                                            text = "${state.water}Л",
                                             style = TextStyle(
                                                 Brush.horizontalGradient(
                                                     colors = listOf(
@@ -161,9 +167,11 @@ fun ActivityTrackerScreen(navController: NavController) {
                                     }
                                 }
                             }
+                            Spacer(modifier = Modifier
+                                .width(15.dp))
                             Box(
                                 modifier = Modifier
-                                    .width(110.dp)
+                                    .weight(1f)
                                     .background(
                                         Color.White,
                                         shape = RoundedCornerShape(12.dp)
@@ -184,7 +192,7 @@ fun ActivityTrackerScreen(navController: NavController) {
                                             .padding(start = 8.dp)
                                     ) {
                                         Text(
-                                            text = "2400",
+                                            text = "${state.steps}",
                                             style = TextStyle(
                                                 Brush.horizontalGradient(
                                                     colors = listOf(
@@ -224,10 +232,7 @@ fun ActivityTrackerScreen(navController: NavController) {
                         fontWeight = FontWeight(600),
                         fontFamily = montserratBold
                     )
-                    Button(
-                        onClick = {
-
-                        },
+                    Box(
                         modifier = Modifier
                             .background(
                                 Brush.horizontalGradient(
@@ -238,15 +243,14 @@ fun ActivityTrackerScreen(navController: NavController) {
                                 ),
                                 shape = RoundedCornerShape(50.dp)
                             )
-                            .size(76.dp, 30.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            contentColor = Color.White,
-                            containerColor = Color.Transparent
-                        )
+                            .size(76.dp, 30.dp)
+                            .clickable {  },
+                        contentAlignment = Alignment.Center
                     ) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Text(
                                 text = "Неделя",
+                                color = Color.White,
                                 fontSize = 10.sp,
                                 fontWeight = FontWeight(400),
                                 fontFamily = montserratRegular
@@ -254,6 +258,7 @@ fun ActivityTrackerScreen(navController: NavController) {
                             Icon(
                                 painter = painterResource(R.drawable.arrow_down),
                                 contentDescription = null,
+                                tint = Color.White,
                                 modifier = Modifier
                                     .padding(start = 5.dp)
                             )
@@ -261,14 +266,6 @@ fun ActivityTrackerScreen(navController: NavController) {
                     }
                 }
                         BarChartActivityTracker()
-//                Image(
-//                    painter = painterResource(R.drawable.graph_activity_tracker),
-//                    contentDescription = null,
-//                    modifier = Modifier
-//                        .padding(top = 15.dp)
-//                        .fillMaxWidth()
-//                        .height(200.dp)
-//                )
                 Row(
                     modifier = Modifier
                         .padding(top = 30.dp)

@@ -1,7 +1,8 @@
 package com.example.fitnessapp.data.repository
 
-import com.example.fitnessapp.data.models.Profile
+import com.example.fitnessapp.feature_app.domain.models.Profile
 import com.example.fitnessapp.data.supabase.Connect.supabase
+import com.example.fitnessapp.feature_app.domain.models.Target
 import com.example.fitnessapp.feature_app.domain.repository.AuthRepository
 import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.auth.providers.builtin.Email
@@ -46,7 +47,7 @@ class AuthRepositoryImpl: AuthRepository {
         }
     }
 
-    override suspend fun addTarget(target: String) {
+    override suspend fun addTodayTarget(target: String) {
         val target = Profile(target = target)
         supabase.from("profile").update(target){
             filter{
@@ -75,5 +76,10 @@ class AuthRepositoryImpl: AuthRepository {
     private suspend fun getUserId() : String{
         supabase.auth.awaitInitialization()
         return supabase.auth.currentUserOrNull()?.id ?: ""
+    }
+
+    override suspend fun addTodayTarget(water: Int, steps: Int) {
+        val target: Target = Target(water = water, steps = steps, user_id = getUserId())
+        supabase.from("targets").insert(target)
     }
 }

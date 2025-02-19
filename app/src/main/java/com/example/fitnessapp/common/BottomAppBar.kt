@@ -38,7 +38,7 @@ fun PrevBottomAppBar(){
 fun BottomAppBar(navController: NavController, activityNumber: Int) {
     var homeIcon = painterResource(R.drawable.home_icon)
     var cameraIcon = painterResource(R.drawable.camera_icon)
-    var profileIcon = painterResource(R.drawable.profile_icon)
+    var profileIcon = painterResource(R.drawable.profile_bottom_icon)
     when(activityNumber){
         1 -> homeIcon = painterResource(R.drawable.home_active)
         3 -> cameraIcon = painterResource(R.drawable.camera_active)
@@ -98,7 +98,9 @@ fun BottomAppBar(navController: NavController, activityNumber: Int) {
                             tint = Color.Unspecified)
                     }
                     IconButton(onClick = {
-
+                        if(activityNumber != 4){
+                            navController.navigate(NavRoutes.Profile.route)
+                        }
                     }) {
                         Icon(painter = profileIcon,
                             contentDescription = null,

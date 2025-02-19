@@ -1,10 +1,8 @@
 package com.example.fitnessapp
 
 import android.os.Bundle
-import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -30,7 +28,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             FitnessAppTheme {
                 val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = NavRoutes.Profile.route){
+                NavHost(navController = navController, startDestination = NavRoutes.WelcomeScreen.route){
                     composable(NavRoutes.WelcomeScreen.route){ WelcomeScreen(navController) }
                     composable(NavRoutes.OnBoarding1.route){ OnBoarding1(navController) }
                     composable(NavRoutes.OnBoarding2.route){ OnBoarding2(navController) }

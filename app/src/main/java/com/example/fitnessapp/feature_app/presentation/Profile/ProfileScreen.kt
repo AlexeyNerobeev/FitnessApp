@@ -1,10 +1,8 @@
 package com.example.fitnessapp.feature_app.presentation.Profile
 
-import android.health.connect.datatypes.ExerciseCompletionGoal.UnspecifiedGoal
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,9 +15,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
@@ -28,8 +25,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
@@ -42,6 +37,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.R
+import com.example.fitnessapp.common.BottomAppBar
 import com.example.fitnessapp.common.TopAppBar
 import com.example.fitnessapp.presentation.Registration.screens.montserratBold
 import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
@@ -57,6 +53,7 @@ fun PrevProfileScreen() {
 @Composable
 fun ProfileScreen(navController: NavController, vm: ProfileVM = koinViewModel()) {
     val state = vm.state.value
+    vm.onEvent(ProfileEvent.GetProfile)
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Column(
             modifier = Modifier
@@ -80,7 +77,7 @@ fun ProfileScreen(navController: NavController, vm: ProfileVM = koinViewModel())
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Image(
-                            painter = painterResource(R.drawable.profile_icon),
+                            painter = painterResource(R.drawable.profile),
                             contentDescription = null
                         )
                         Column(
@@ -88,14 +85,14 @@ fun ProfileScreen(navController: NavController, vm: ProfileVM = koinViewModel())
                                 .padding(start = 15.dp)
                         ) {
                             Text(
-                                text = "Олег Сергеев",
+                                text = state.name,
                                 color = Color.Black,
                                 fontFamily = montserratBold,
                                 fontSize = 14.sp,
                                 fontWeight = FontWeight(500)
                             )
                             Text(
-                                text = "Программа «Похудей»",
+                                text = state.target,
                                 color = colorResource(R.color.onBoardingText),
                                 fontWeight = FontWeight(400),
                                 fontFamily = montserratRegular,
@@ -104,50 +101,52 @@ fun ProfileScreen(navController: NavController, vm: ProfileVM = koinViewModel())
                                     .padding(top = 5.dp)
                             )
                         }
-                        Button(
-                            onClick = {},
-                            modifier = Modifier
-                                .padding(start = 9.dp)
-                                .background(
-                                    Brush.horizontalGradient(
-                                        colors = listOf(
-                                            colorResource(R.color.startGradient),
-                                            colorResource(R.color.endGradient)
-                                        )
-                                    ), shape = RoundedCornerShape(99.dp)
+                        Box(modifier = Modifier
+                            .fillMaxWidth(),
+                            contentAlignment = Alignment.CenterEnd){
+                            Box(modifier = Modifier
+                                .size(95.dp, 30.dp)
+                                .background(Brush.horizontalGradient(
+                                    colors = listOf(
+                                        colorResource(R.color.startGradient),
+                                        colorResource(R.color.endGradient)
+                                    )
                                 ),
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = Color.Transparent,
-                                contentColor = Color.White
-                            )
-                        ) {
-                            Text(
-                                text = "Изменить",
-                                color = Color.White,
-                                fontWeight = FontWeight(500),
-                                fontFamily = montserratRegular,
-                                fontSize = 12.sp
-                            )
+                                    shape = RoundedCornerShape(99.dp))
+                                .clickable {
+
+                                },
+                                contentAlignment = Alignment.Center
+                            ){
+                                Text(text = "Изменить",
+                                    color = Color.White,
+                                    fontSize = 12.sp,
+                                    fontFamily = montserratRegular,
+                                    fontWeight = FontWeight(500)
+                                )
+                            }
                         }
                     }
                     Row(
                         modifier = Modifier
-                            .padding(15.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween
+                            .padding(top = 15.dp)
+                            .fillMaxWidth()
                     ) {
-                        Box(
+                        ElevatedCard(
+                            elevation = CardDefaults.cardElevation(
+                                defaultElevation = 10.dp
+                            ),
                             modifier = Modifier
-                                .size(95.dp, 65.dp)
-                                .background(
-                                    Color.White,
+                                .weight(1f)
+                                .background(colorResource(R.color.shadowColor),
                                     RoundedCornerShape(16.dp)
-                                )
-                                .shadow(
-                                    5.dp,
-                                    RoundedCornerShape(16.dp),
-                                    spotColor = colorResource(R.color.shadowColor),
-                                    ambientColor = Color.White
-                                )
+                                ),
+                            colors = CardDefaults.cardColors(
+                                containerColor = Color.White,
+                                contentColor = Color.Transparent
+                            ),
+                            shape = RoundedCornerShape(16.dp),
+
                         ) {
                             Column(
                                 modifier = Modifier
@@ -157,7 +156,7 @@ fun ProfileScreen(navController: NavController, vm: ProfileVM = koinViewModel())
                                 horizontalAlignment = Alignment.CenterHorizontally
                             ) {
                                 Text(
-                                    text = "180",
+                                    text = "${state.height}",
                                     style = TextStyle(
                                         Brush.horizontalGradient(
                                             colors = listOf(
@@ -186,19 +185,23 @@ fun ProfileScreen(navController: NavController, vm: ProfileVM = koinViewModel())
                                 )
                             }
                         }
-                        Box(
+                        Spacer(modifier = Modifier
+                            .width(15.dp))
+                        ElevatedCard(
                             modifier = Modifier
-                                .size(95.dp, 65.dp)
+                                .weight(1f)
                                 .background(
-                                    Color.White,
+                                    colorResource(R.color.shadowColor),
                                     RoundedCornerShape(16.dp)
-                                )
-                                .shadow(
-                                    5.dp,
-                                    RoundedCornerShape(16.dp),
-                                    spotColor = colorResource(R.color.shadowColor),
-                                    ambientColor = Color.White
-                                )
+                                ),
+                            elevation = CardDefaults.cardElevation(
+                                defaultElevation = 10.dp
+                            ),
+                            colors = CardDefaults.cardColors(
+                                containerColor = Color.White,
+                                contentColor = Color.Transparent
+                            ),
+                            shape = RoundedCornerShape(16.dp)
                         ) {
                             Column(
                                 modifier = Modifier
@@ -208,7 +211,7 @@ fun ProfileScreen(navController: NavController, vm: ProfileVM = koinViewModel())
                                 horizontalAlignment = Alignment.CenterHorizontally
                             ) {
                                 Text(
-                                    text = "65",
+                                    text = "${state.weight}",
                                     style = TextStyle(
                                         Brush.horizontalGradient(
                                             colors = listOf(
@@ -237,19 +240,23 @@ fun ProfileScreen(navController: NavController, vm: ProfileVM = koinViewModel())
                                 )
                             }
                         }
-                        Box(
+                        Spacer(modifier = Modifier
+                            .width(15.dp))
+                        ElevatedCard(
                             modifier = Modifier
-                                .size(95.dp, 65.dp)
+                                .weight(1f)
                                 .background(
-                                    Color.White,
+                                    colorResource(R.color.shadowColor),
                                     RoundedCornerShape(16.dp)
-                                )
-                                .shadow(
-                                    5.dp,
-                                    RoundedCornerShape(16.dp),
-                                    spotColor = colorResource(R.color.shadowColor),
-                                    ambientColor = Color.White
-                                )
+                                ),
+                            elevation = CardDefaults.cardElevation(
+                                defaultElevation = 10.dp
+                            ),
+                            shape = RoundedCornerShape(16.dp),
+                            colors = CardDefaults.cardColors(
+                                contentColor = Color.Transparent,
+                                containerColor = Color.White
+                            )
                         ) {
                             Column(
                                 modifier = Modifier
@@ -295,19 +302,21 @@ fun ProfileScreen(navController: NavController, vm: ProfileVM = koinViewModel())
                             .fillMaxWidth()
                     ) {
                         item {
-                            Box(
+                            ElevatedCard(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .background(
-                                        Color.White,
+                                        colorResource(R.color.shadowColor),
                                         RoundedCornerShape(16.dp)
-                                    )
-                                    .shadow(
-                                        5.dp,
-                                        RoundedCornerShape(16.dp),
-                                        spotColor = colorResource(R.color.shadowColor),
-                                        ambientColor = Color.White
-                                    )
+                                    ),
+                                elevation = CardDefaults.cardElevation(
+                                    defaultElevation = 10.dp
+                                ),
+                                shape = RoundedCornerShape(16.dp),
+                                colors = CardDefaults.cardColors(
+                                    containerColor = Color.White,
+                                    contentColor = Color.Transparent
+                                )
                             ) {
                                 Column(
                                     modifier = Modifier
@@ -452,13 +461,20 @@ fun ProfileScreen(navController: NavController, vm: ProfileVM = koinViewModel())
                                     }
                                 }
                             }
-                            Box(modifier = Modifier
+                            ElevatedCard(modifier = Modifier
                                 .padding(top = 15.dp)
-                                .background(Color.White,
+                                .background(
+                                    colorResource(R.color.shadowColor),
                                     RoundedCornerShape(16.dp)
+                                ),
+                                elevation = CardDefaults.cardElevation(
+                                    defaultElevation = 10.dp
+                                ),
+                                shape = RoundedCornerShape(16.dp),
+                                colors = CardDefaults.cardColors(
+                                    containerColor = Color.White,
+                                    contentColor = Color.Transparent
                                 )
-                                .shadow(5.dp, RoundedCornerShape(16.dp), spotColor = colorResource(R.color.shadowColor),
-                                    ambientColor = Color.White)
                             ){
                                 Column(modifier = Modifier
                                     .padding(vertical = 20.dp)
@@ -479,12 +495,12 @@ fun ProfileScreen(navController: NavController, vm: ProfileVM = koinViewModel())
                                         verticalAlignment = Alignment.CenterVertically
                                     ) {
                                         Icon(
-                                            painter = painterResource(R.drawable.account_data),
+                                            painter = painterResource(R.drawable.switch_notif_icon),
                                             contentDescription = null,
                                             tint = Color.Unspecified
                                         )
                                         Text(
-                                            text = "Данные аккаунта",
+                                            text = "Уведомления",
                                             color = colorResource(R.color.onBoardingText),
                                             fontWeight = FontWeight(400),
                                             fontSize = 12.sp,
@@ -502,7 +518,10 @@ fun ProfileScreen(navController: NavController, vm: ProfileVM = koinViewModel())
                                                     vm.onEvent(ProfileEvent.ChangeCheck)
                                                 },
                                                 colors = SwitchDefaults.colors(
-                                                    checkedTrackColor = colorResource(R.color.startGradient)
+                                                    checkedTrackColor = colorResource(R.color.startGradient),
+                                                    checkedThumbColor = Color.White,
+                                                    uncheckedThumbColor = Color.White,
+                                                    uncheckedTrackColor = Color.LightGray
                                                 ),
                                                 modifier = Modifier
                                                     .size(36.dp, 18.dp)
@@ -511,13 +530,20 @@ fun ProfileScreen(navController: NavController, vm: ProfileVM = koinViewModel())
                                     }
                                 }
                             }
-                            Box(modifier = Modifier
+                            ElevatedCard(modifier = Modifier
                                 .padding(top = 15.dp)
-                                .background(Color.White,
+                                .background(
+                                    colorResource(R.color.shadowColor),
                                     RoundedCornerShape(16.dp)
+                                ),
+                                elevation = CardDefaults.cardElevation(
+                                    defaultElevation = 10.dp
+                                ),
+                                shape = RoundedCornerShape(16.dp),
+                                colors = CardDefaults.cardColors(
+                                    containerColor = Color.White,
+                                    contentColor = Color.Transparent
                                 )
-                                .shadow(5.dp, RoundedCornerShape(16.dp), spotColor = colorResource(R.color.shadowColor),
-                                    ambientColor = Color.White)
                             ){
                                 Column(modifier = Modifier
                                     .padding(vertical = 20.dp)
@@ -561,12 +587,83 @@ fun ProfileScreen(navController: NavController, vm: ProfileVM = koinViewModel())
                                             )
                                         }
                                     }
+                                    Row(
+                                        modifier = Modifier
+                                            .padding(top = 15.dp)
+                                            .fillMaxWidth()
+                                            .clickable {  },
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Icon(
+                                            painter = painterResource(R.drawable.privacy_icon),
+                                            contentDescription = null,
+                                            tint = Color.Unspecified
+                                        )
+                                        Text(
+                                            text = "Политика кондефициальности",
+                                            color = colorResource(R.color.onBoardingText),
+                                            fontWeight = FontWeight(400),
+                                            fontSize = 12.sp,
+                                            fontFamily = poppinsFont,
+                                            modifier = Modifier
+                                                .padding(start = 10.dp)
+                                        )
+                                        Box(
+                                            modifier = Modifier
+                                                .fillMaxWidth(),
+                                            contentAlignment = Alignment.CenterEnd
+                                        ) {
+                                            Icon(painter = painterResource(R.drawable.arrow),
+                                                contentDescription = null,
+                                                tint = colorResource(R.color.onBoardingText)
+                                            )
+                                        }
+                                    }
+                                    Row(
+                                        modifier = Modifier
+                                            .padding(top = 15.dp)
+                                            .fillMaxWidth()
+                                            .clickable {  },
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Icon(
+                                            painter = painterResource(R.drawable.settings_icon),
+                                            contentDescription = null,
+                                            tint = Color.Unspecified
+                                        )
+                                        Text(
+                                            text = "Настройки",
+                                            color = colorResource(R.color.onBoardingText),
+                                            fontWeight = FontWeight(400),
+                                            fontSize = 12.sp,
+                                            fontFamily = poppinsFont,
+                                            modifier = Modifier
+                                                .padding(start = 10.dp)
+                                        )
+                                        Box(
+                                            modifier = Modifier
+                                                .fillMaxWidth(),
+                                            contentAlignment = Alignment.CenterEnd
+                                        ) {
+                                            Icon(painter = painterResource(R.drawable.arrow),
+                                                contentDescription = null,
+                                                tint = colorResource(R.color.onBoardingText)
+                                            )
+                                        }
+                                    }
                                 }
                             }
+                            Box(modifier = Modifier
+                                .height(100.dp))
                         }
                     }
                 }
             }
+        }
+        Box(modifier = Modifier
+            .fillMaxSize(),
+            contentAlignment = Alignment.BottomCenter){
+            BottomAppBar(navController, 4)
         }
     }
 }

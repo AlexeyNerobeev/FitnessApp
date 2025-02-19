@@ -1,4 +1,4 @@
-package com.example.fitnessapp.data.models
+package com.example.fitnessapp.feature_app.domain.models
 
 import kotlinx.serialization.Serializable
 
