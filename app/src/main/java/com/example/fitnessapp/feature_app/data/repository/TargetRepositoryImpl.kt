@@ -24,6 +24,7 @@ class TargetRepositoryImpl: TargetRepository {
     }
 
     private suspend fun getUserId(): String{
+        supabase.auth.awaitInitialization()
         return supabase.auth.currentUserOrNull()?.id?:""
     }
 }

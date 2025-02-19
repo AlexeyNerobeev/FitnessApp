@@ -43,9 +43,12 @@ import com.example.fitnessapp.feature_app.presentation.Home.components.BarChartH
 import com.example.fitnessapp.NavRoutes
 import com.example.fitnessapp.R
 import com.example.fitnessapp.common.BottomAppBar
+import com.example.fitnessapp.feature_app.presentation.Home.HomeEvent
+import com.example.fitnessapp.feature_app.presentation.Home.HomeVM
 import com.example.fitnessapp.feature_app.presentation.Home.components.PieChartHome
 import com.example.fitnessapp.presentation.Registration.screens.montserratBold
 import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
+import org.koin.androidx.compose.koinViewModel
 
 @Preview
 @Composable
@@ -55,7 +58,9 @@ fun PrevHome() {
 }
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(navController: NavController, vm: HomeVM = koinViewModel()) {
+    val state = vm.state.value
+    vm.onEvent(HomeEvent.GetName)
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Column(
             modifier = Modifier
@@ -79,7 +84,7 @@ fun HomeScreen(navController: NavController) {
                         fontWeight = FontWeight(400)
                     )
                     Text(
-                        text = "Юрий",
+                        text = state.name,
                         color = Color.Black,
                         fontSize = 20.sp,
                         fontFamily = montserratBold,

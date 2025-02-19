@@ -26,6 +26,7 @@ class NotificationRepositoryImpl: NotificationRepository {
     }
 
     private suspend fun getUserId(): String{
+        supabase.auth.awaitInitialization()
         return supabase.auth.currentUserOrNull()?.id?:""
     }
 }

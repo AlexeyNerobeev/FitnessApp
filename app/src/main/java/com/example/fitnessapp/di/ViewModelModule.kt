@@ -2,6 +2,7 @@ package com.example.fitnessapp.di
 
 import com.example.fitnessapp.feature_app.domain.models.Target
 import com.example.fitnessapp.feature_app.presentation.ActivityTracker.ActivityTrackerVM
+import com.example.fitnessapp.feature_app.presentation.Home.HomeVM
 import com.example.fitnessapp.feature_app.presentation.Notification.NotificationVM
 import com.example.fitnessapp.feature_app.presentation.Profile.ProfileVM
 import com.example.fitnessapp.feature_app.presentation.RegistartionPage2.RegistrVM2
@@ -48,5 +49,8 @@ val moduleVM = module {
     }
     viewModel<NotificationVM>{
         NotificationVM(get())
+    }
+    viewModel<HomeVM>{
+        HomeVM(get())
     }
 }
