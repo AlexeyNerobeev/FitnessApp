@@ -27,4 +27,6 @@
     <color name="notificationTime">#B6B4C2</color>
     <color name="lastActivity">#A4A9AD</color>
     <color name="homeBarChart">#A8E3D9</color>
+    <color name="workoutColor">#68C6B6</color>
+    <color name="improveColor">#42D742</color>
 </resources>

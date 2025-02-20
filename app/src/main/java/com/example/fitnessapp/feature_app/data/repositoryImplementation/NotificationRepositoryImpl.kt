@@ -1,4 +1,4 @@
-package com.example.fitnessapp.feature_app.data.repository
+package com.example.fitnessapp.feature_app.data.repositoryImplementation
 
 import com.example.fitnessapp.data.supabase.Connect.supabase
 import com.example.fitnessapp.feature_app.domain.models.Notification

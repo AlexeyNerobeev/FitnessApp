@@ -6,5 +6,6 @@ data class ProfileState(
     val target: String = "",
     val height: Int = 0,
     val weight: Int = 0,
-    val birthday: String = ""
+    val birthday: String = "",
+    val goToWorkout: Boolean = false
 )

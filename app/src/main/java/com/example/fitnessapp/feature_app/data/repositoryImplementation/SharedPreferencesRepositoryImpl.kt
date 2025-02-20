@@ -1,4 +1,4 @@
-package com.example.fitnessapp.feature_app.data.repository
+package com.example.fitnessapp.feature_app.data.repositoryImplementation
 
 import android.content.Context
 import com.example.fitnessapp.feature_app.domain.repository.SharedPrefsRepository

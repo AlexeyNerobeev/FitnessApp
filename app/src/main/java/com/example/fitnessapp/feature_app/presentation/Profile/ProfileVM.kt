@@ -40,6 +40,11 @@ class ProfileVM(
                     }
                 }
             }
+            is ProfileEvent.GoToWorkoutTracker ->{
+                _state.value = state.value.copy(
+                    goToWorkout = true
+                )
+            }
         }
     }
 }

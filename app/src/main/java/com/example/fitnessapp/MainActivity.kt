@@ -9,6 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.feature_app.presentation.ActivityTracker.ActivityTrackerScreen
 import com.example.fitnessapp.feature_app.presentation.Notification.NotificationScreen
 import com.example.fitnessapp.feature_app.presentation.Profile.ProfileScreen
+import com.example.fitnessapp.feature_app.presentation.WorkoutTracker.WorkoutTrackerScreen
 import com.example.fitnessapp.presentation.Home.HomeScreen
 import com.example.fitnessapp.presentation.Login.LoginPage
 import com.example.fitnessapp.presentation.OnBoard.OnBoarding1
@@ -28,7 +29,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             FitnessAppTheme {
                 val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = NavRoutes.WelcomeScreen.route){
+                NavHost(navController = navController, startDestination = NavRoutes.WorkoutTracker.route){
                     composable(NavRoutes.WelcomeScreen.route){ WelcomeScreen(navController) }
                     composable(NavRoutes.OnBoarding1.route){ OnBoarding1(navController) }
                     composable(NavRoutes.OnBoarding2.route){ OnBoarding2(navController) }
@@ -43,6 +44,7 @@ class MainActivity : ComponentActivity() {
                     composable(NavRoutes.Notifications.route){ NotificationScreen(navController)}
                     composable(NavRoutes.ActivityTracker.route){ ActivityTrackerScreen(navController)}
                     composable(NavRoutes.Profile.route){ ProfileScreen(navController)}
+                    composable(NavRoutes.WorkoutTracker.route) { WorkoutTrackerScreen(navController) }
                 }
             }
         }

@@ -23,6 +23,7 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -35,7 +36,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.example.fitnessapp.NavRoutes
 import com.example.fitnessapp.R
 import com.example.fitnessapp.common.BottomAppBar
 import com.example.fitnessapp.common.TopAppBar
@@ -54,6 +57,11 @@ fun PrevProfileScreen() {
 fun ProfileScreen(navController: NavController, vm: ProfileVM = koinViewModel()) {
     val state = vm.state.value
     vm.onEvent(ProfileEvent.GetProfile)
+    LaunchedEffect(key1 = !state.goToWorkout) {
+        if(state.goToWorkout){
+            navController.navigate(NavRoutes.WorkoutTracker.route)
+        }
+    }
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Column(
             modifier = Modifier
@@ -431,7 +439,9 @@ fun ProfileScreen(navController: NavController, vm: ProfileVM = koinViewModel())
                                         modifier = Modifier
                                             .padding(top = 15.dp)
                                             .fillMaxWidth()
-                                            .clickable {  },
+                                            .clickable {
+                                                vm.onEvent(ProfileEvent.GoToWorkoutTracker)
+                                            },
                                         verticalAlignment = Alignment.CenterVertically
                                     ) {
                                         Icon(

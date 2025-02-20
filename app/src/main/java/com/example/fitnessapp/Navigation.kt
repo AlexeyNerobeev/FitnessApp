@@ -15,4 +15,5 @@ sealed class NavRoutes(val route: String){
     data object Notifications: NavRoutes("Notifications")
     data object ActivityTracker: NavRoutes("ActivityTracker")
     data object Profile: NavRoutes("Profile")
+    data object WorkoutTracker: NavRoutes("WorkoutTracker")
 }
