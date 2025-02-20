@@ -9,6 +9,7 @@ import com.example.fitnessapp.feature_app.presentation.RegistartionPage2.Registr
 import com.example.fitnessapp.feature_app.presentation.Registration.RegisterVM
 import com.example.fitnessapp.feature_app.presentation.SuccessRegistartion.SuccessRegistrationVM
 import com.example.fitnessapp.feature_app.presentation.WelcomeScreen.WelcomeVM
+import com.example.fitnessapp.feature_app.presentation.WorkoutDetails1.WorkoutDetails1VM
 import com.example.fitnessapp.feature_app.presentation.WorkoutTracker.WorkoutVM
 import com.example.fitnessapp.presentation.Login.LoginVM
 import com.example.fitnessapp.presentation.OnBoard.OnBoardVM
@@ -56,5 +57,8 @@ val moduleVM = module {
     }
     viewModel<WorkoutVM>{
         WorkoutVM()
+    }
+    viewModel<WorkoutDetails1VM>{
+        WorkoutDetails1VM(get())
     }
 }

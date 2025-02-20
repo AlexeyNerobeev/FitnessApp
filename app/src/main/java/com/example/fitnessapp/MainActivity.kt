@@ -31,7 +31,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             FitnessAppTheme {
                 val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = NavRoutes.WorkoutTracker.route){
+                NavHost(navController = navController, startDestination = NavRoutes.WorkoutDetails1.route){
                     composable(NavRoutes.WelcomeScreen.route){ WelcomeScreen(navController) }
                     composable(NavRoutes.OnBoarding1.route){ OnBoarding1(navController) }
                     composable(NavRoutes.OnBoarding2.route){ OnBoarding2(navController) }

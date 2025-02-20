@@ -7,6 +7,7 @@ import com.example.fitnessapp.di.moduleProfile
 import com.example.fitnessapp.di.moduleSharedPreferences
 import com.example.fitnessapp.di.moduleTarget
 import com.example.fitnessapp.di.moduleVM
+import com.example.fitnessapp.di.moduleWorkout
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -21,7 +22,7 @@ class App: Application() {
             androidLogger(Level.DEBUG)
             modules(
                 moduleAuth, moduleVM, moduleSharedPreferences, moduleProfile,
-                moduleTarget, moduleNotification
+                moduleTarget, moduleNotification, moduleWorkout
 
             )
         }
