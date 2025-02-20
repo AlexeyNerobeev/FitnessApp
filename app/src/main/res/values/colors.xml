@@ -29,4 +29,7 @@
     <color name="homeBarChart">#A8E3D9</color>
     <color name="workoutColor">#68C6B6</color>
     <color name="improveColor">#42D742</color>
+    <color name="trainingSchedule">#5DDDC7</color>
+    <color name="uncheckedSwitch">#C6C4D4</color>
+    <color name="trainingCard">#67C5B4</color>
 </resources>

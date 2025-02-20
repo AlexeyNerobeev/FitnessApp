@@ -9,6 +9,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.feature_app.presentation.ActivityTracker.ActivityTrackerScreen
 import com.example.fitnessapp.feature_app.presentation.Notification.NotificationScreen
 import com.example.fitnessapp.feature_app.presentation.Profile.ProfileScreen
+import com.example.fitnessapp.feature_app.presentation.WorkoutDetails1.WorkoutDetails1Screen
+import com.example.fitnessapp.feature_app.presentation.WorkoutSchedule.WorkoutScheduleScreen
 import com.example.fitnessapp.feature_app.presentation.WorkoutTracker.WorkoutTrackerScreen
 import com.example.fitnessapp.presentation.Home.HomeScreen
 import com.example.fitnessapp.presentation.Login.LoginPage
@@ -45,6 +47,8 @@ class MainActivity : ComponentActivity() {
                     composable(NavRoutes.ActivityTracker.route){ ActivityTrackerScreen(navController)}
                     composable(NavRoutes.Profile.route){ ProfileScreen(navController)}
                     composable(NavRoutes.WorkoutTracker.route) { WorkoutTrackerScreen(navController) }
+                    composable(NavRoutes.WorkoutSchedule.route){ WorkoutScheduleScreen(navController)}
+                    composable(NavRoutes.WorkoutDetails1.route){ WorkoutDetails1Screen(navController)}
                 }
             }
         }
