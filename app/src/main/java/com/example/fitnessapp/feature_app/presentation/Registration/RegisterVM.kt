@@ -7,12 +7,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.fitnessapp.feature_app.domain.usecase.AddTodayTargetUseCase
 import com.example.fitnessapp.feature_app.domain.usecase.RegistrUseCase
 import com.example.fitnessapp.feature_app.presentation.RegistartionPage2.RegistrEvent2
 import kotlinx.coroutines.launch
 
 class RegisterVM(
-    private val registrUseCase: RegistrUseCase
+    private val registrUseCase: RegistrUseCase,
+    private val addTodayTargetUseCase: AddTodayTargetUseCase
 ): ViewModel() {
     private val _state = mutableStateOf(RegistrState())
     val state: State<RegistrState> = _state
@@ -64,6 +66,7 @@ class RegisterVM(
                     try {
                         registrUseCase.invoke(state.value.email, state.value.password,
                             state.value.fio, state.value.phone)
+                        addTodayTargetUseCase.invoke(8, 2400)
                         _state.value = state.value.copy(
                             isComplete = true
                         )

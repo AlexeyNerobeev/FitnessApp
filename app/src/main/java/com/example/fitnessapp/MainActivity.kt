@@ -1,13 +1,17 @@
 package com.example.fitnessapp
 
 import android.os.Bundle
-import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.fitnessapp.feature_app.presentation.ActivityTracker.ActivityTrackerScreen
+import com.example.fitnessapp.feature_app.presentation.Notification.NotificationScreen
+import com.example.fitnessapp.feature_app.presentation.Profile.ProfileScreen
+import com.example.fitnessapp.feature_app.presentation.WorkoutDetails1.WorkoutDetails1Screen
+import com.example.fitnessapp.feature_app.presentation.WorkoutSchedule.WorkoutScheduleScreen
+import com.example.fitnessapp.feature_app.presentation.WorkoutTracker.WorkoutTrackerScreen
 import com.example.fitnessapp.presentation.Home.HomeScreen
 import com.example.fitnessapp.presentation.Login.LoginPage
 import com.example.fitnessapp.presentation.OnBoard.OnBoarding1
@@ -27,7 +31,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             FitnessAppTheme {
                 val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = NavRoutes.WelcomeScreen.route){
+                NavHost(navController = navController, startDestination = NavRoutes.WorkoutTracker.route){
                     composable(NavRoutes.WelcomeScreen.route){ WelcomeScreen(navController) }
                     composable(NavRoutes.OnBoarding1.route){ OnBoarding1(navController) }
                     composable(NavRoutes.OnBoarding2.route){ OnBoarding2(navController) }
@@ -39,6 +43,12 @@ class MainActivity : ComponentActivity() {
                     composable(NavRoutes.Target.route){ TargetScreen(navController) }
                     composable(NavRoutes.SuccessRegistration.route){ SuccessRegistration(navController) }
                     composable(NavRoutes.Home.route){ HomeScreen(navController) }
+                    composable(NavRoutes.Notifications.route){ NotificationScreen(navController)}
+                    composable(NavRoutes.ActivityTracker.route){ ActivityTrackerScreen(navController)}
+                    composable(NavRoutes.Profile.route){ ProfileScreen(navController)}
+                    composable(NavRoutes.WorkoutTracker.route) { WorkoutTrackerScreen(navController) }
+                    composable(NavRoutes.WorkoutSchedule.route){ WorkoutScheduleScreen(navController)}
+                    composable(NavRoutes.WorkoutDetails1.route){ WorkoutDetails1Screen(navController)}
                 }
             }
         }

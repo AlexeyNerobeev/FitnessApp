@@ -6,6 +6,6 @@ class AddTargetUseCase(
     private val authRepository: AuthRepository
 ) {
     suspend operator fun invoke(target: String){
-        authRepository.addTarget(target)
+        authRepository.addTodayTarget(target)
     }
 }

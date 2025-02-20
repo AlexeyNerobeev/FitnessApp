@@ -21,4 +21,15 @@
     <color name="shadowColor">#1D161712</color>
     <color name="mealPlannerBG">#DEF2EE</color>
     <color name="mealPlannerButton">#68C6B6</color>
+    <color name="HomeWelcome">#A5A3B0</color>
+    <color name="todayTarget">#5CBDAC</color>
+    <color name="homeGradient">#1D242A0D</color>
+    <color name="notificationTime">#B6B4C2</color>
+    <color name="lastActivity">#A4A9AD</color>
+    <color name="homeBarChart">#A8E3D9</color>
+    <color name="workoutColor">#68C6B6</color>
+    <color name="improveColor">#42D742</color>
+    <color name="trainingSchedule">#5DDDC7</color>
+    <color name="uncheckedSwitch">#C6C4D4</color>
+    <color name="trainingCard">#67C5B4</color>
 </resources>
