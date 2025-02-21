@@ -36,13 +36,20 @@ class ProfileVM(
                             birthday = profile.birthday
                         )
                     } catch (ex: Exception){
-                        Log.e("supa", ex.message.toString())
+                        _state.value = state.value.copy(
+                            error = ex.message.toString()
+                        )
                     }
                 }
             }
             is ProfileEvent.GoToWorkoutTracker ->{
                 _state.value = state.value.copy(
                     goToWorkout = true
+                )
+            }
+            is ProfileEvent.ClearError ->{
+                _state.value = state.value.copy(
+                    error = ""
                 )
             }
         }

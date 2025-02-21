@@ -19,12 +19,23 @@ class ActivityTrackerVM(
         when(event){
             is ActivityTrackerEvent.GetTodayTarget ->{
                 viewModelScope.launch(Dispatchers.IO){
-                    val target: Target = getTodayTargetUseCase.invoke()
-                    _state.value = state.value.copy(
-                        water = target.water,
-                        steps = target.steps
-                    )
+                    try {
+                        val target: Target = getTodayTargetUseCase.invoke()
+                        _state.value = state.value.copy(
+                            water = target.water,
+                            steps = target.steps
+                        )
+                    } catch (ex: Exception){
+                        _state.value = state.value.copy(
+                            error = ex.message.toString()
+                        )
+                    }
                 }
+            }
+            is ActivityTrackerEvent.ClearError ->{
+                _state.value = state.value.copy(
+                    error = ""
+                )
             }
         }
     }

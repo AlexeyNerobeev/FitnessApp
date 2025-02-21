@@ -6,12 +6,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.fitnessapp.feature_app.domain.usecase.GetWorkoutDataUseCase
+import com.example.fitnessapp.feature_app.domain.usecase.SaveCompleteWorkoutUseCase
 import io.ktor.util.Digest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class WorkoutDetails1VM(
-    private val getWorkoutDataUseCase: GetWorkoutDataUseCase
+    private val getWorkoutDataUseCase: GetWorkoutDataUseCase,
+    private val saveCompleteWorkoutUseCase: SaveCompleteWorkoutUseCase
 ): ViewModel() {
     private val _state = mutableStateOf(WorkoutDetails1State())
     val state: State<WorkoutDetails1State> = _state
@@ -25,12 +27,34 @@ class WorkoutDetails1VM(
                         _state.value = state.value.copy(
                             name = workout.name,
                             complexity = workout.complexity,
-                            description = workout.description
+                            description = workout.description,
+                            date = workout.date
                         )
                     } catch(ex: Exception) {
-                        Log.e("supa", ex.message.toString())
+                        _state.value = state.value.copy(
+                            error = ex.message.toString()
+                        )
                     }
                 }
+            }
+            is WorkoutDetails1Event.SaveCompleteWorkout ->{
+                viewModelScope.launch(Dispatchers.IO) {
+                    try {
+                        saveCompleteWorkoutUseCase.invoke(state.value.name, "Выполнено")
+                        _state.value = state.value.copy(
+                            congratulation = true
+                        )
+                    } catch (ex: Exception){
+                        _state.value = state.value.copy(
+                            error = ex.message.toString()
+                        )
+                    }
+                }
+            }
+            is WorkoutDetails1Event.ClearError ->{
+                _state.value = state.value.copy(
+                    error = ""
+                )
             }
         }
     }

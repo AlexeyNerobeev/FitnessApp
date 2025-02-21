@@ -19,11 +19,22 @@ class NotificationVM(
         when(event){
             is NotificationEvent.GetNotifications ->{
                 viewModelScope.launch(Dispatchers.IO) {
-                    val notification: List<Notification> = getNotificationsUseCase.invoke()
-                    _state.value = state.value.copy(
-                        notifications = notification
-                    )
+                    try{
+                        val notification: List<Notification> = getNotificationsUseCase.invoke()
+                        _state.value = state.value.copy(
+                            notifications = notification
+                        )
+                    } catch (ex: Exception){
+                        _state.value = state.value.copy(
+                            error = ex.message.toString()
+                        )
+                    }
                 }
+            }
+            is NotificationEvent.ClearError ->{
+                _state.value = state.value.copy(
+                    error = ""
+                )
             }
         }
     }

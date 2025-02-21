@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.feature_app.presentation.ActivityTracker.ActivityTrackerScreen
+import com.example.fitnessapp.feature_app.presentation.CongratulationPage.CongratulationPage
 import com.example.fitnessapp.feature_app.presentation.Notification.NotificationScreen
 import com.example.fitnessapp.feature_app.presentation.Profile.ProfileScreen
 import com.example.fitnessapp.feature_app.presentation.WorkoutDetails1.WorkoutDetails1Screen
@@ -23,7 +24,7 @@ import com.example.fitnessapp.presentation.Registration.screens.RegisterPage2
 import com.example.fitnessapp.presentation.Registration.screens.SuccessRegistration
 import com.example.fitnessapp.presentation.Target.TargetScreen
 import com.example.fitnessapp.presentation.WelcomeScreen.WelcomeScreen
-import com.example.fitnessapp.ui.theme.FitnessAppTheme
+import com.example.fitnessapp.feature_app.presentation.ui.theme.FitnessAppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +32,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             FitnessAppTheme {
                 val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = NavRoutes.WorkoutDetails1.route){
+                NavHost(navController = navController, startDestination = NavRoutes.WelcomeScreen.route){
                     composable(NavRoutes.WelcomeScreen.route){ WelcomeScreen(navController) }
                     composable(NavRoutes.OnBoarding1.route){ OnBoarding1(navController) }
                     composable(NavRoutes.OnBoarding2.route){ OnBoarding2(navController) }
@@ -49,6 +50,7 @@ class MainActivity : ComponentActivity() {
                     composable(NavRoutes.WorkoutTracker.route) { WorkoutTrackerScreen(navController) }
                     composable(NavRoutes.WorkoutSchedule.route){ WorkoutScheduleScreen(navController)}
                     composable(NavRoutes.WorkoutDetails1.route){ WorkoutDetails1Screen(navController)}
+                    composable(NavRoutes.Congratulation.route){ CongratulationPage(navController)}
                 }
             }
         }

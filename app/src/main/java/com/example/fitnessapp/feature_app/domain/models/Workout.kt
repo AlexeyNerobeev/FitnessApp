@@ -9,5 +9,6 @@ data class Workout(
     val name: String = "",
     val complexity: String = "",
     val user_id: String = "",
-    val description: String = ""
+    val description: String = "",
+    val date: String = ""
 )

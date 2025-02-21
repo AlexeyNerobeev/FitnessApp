@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.fitnessapp.feature_app.domain.usecase.GetNameUseCase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class SuccessRegistrationVM(
@@ -18,7 +19,7 @@ class SuccessRegistrationVM(
         when(event){
             SuccessRegistrationEvent.GetName ->{
                 try {
-                    viewModelScope.launch {
+                    viewModelScope.launch(Dispatchers.IO) {
                         _state.value = state.value.copy(
                             name = getNameUseCase.invoke()
                         )

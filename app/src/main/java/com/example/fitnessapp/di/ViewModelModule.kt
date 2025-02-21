@@ -59,6 +59,6 @@ val moduleVM = module {
         WorkoutVM()
     }
     viewModel<WorkoutDetails1VM>{
-        WorkoutDetails1VM(get())
+        WorkoutDetails1VM(get(), get())
     }
 }

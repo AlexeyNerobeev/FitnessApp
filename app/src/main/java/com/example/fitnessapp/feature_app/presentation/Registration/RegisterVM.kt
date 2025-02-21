@@ -64,12 +64,21 @@ class RegisterVM(
             RegistrEvent.Registration ->{
                 viewModelScope.launch {
                     try {
-                        registrUseCase.invoke(state.value.email, state.value.password,
-                            state.value.fio, state.value.phone)
-                        addTodayTargetUseCase.invoke(8, 2400)
-                        _state.value = state.value.copy(
-                            isComplete = true
-                        )
+                        if(state.value.email.isNotEmpty() &&
+                            state.value.password.isNotEmpty() &&
+                            state.value.fio.isNotEmpty() &&
+                            state.value.phone.isNotEmpty()){
+                            registrUseCase.invoke(state.value.email, state.value.password,
+                                state.value.fio, state.value.phone)
+                            addTodayTargetUseCase.invoke(8, 2400)
+                            _state.value = state.value.copy(
+                                isComplete = true
+                            )
+                        } else{
+                            _state.value = state.value.copy(
+                                exception = "Не должно быть пустых полей!"
+                            )
+                        }
                     } catch (ex: Exception){
                         _state.value = state.value.copy(
                             exception = ex.message.toString()

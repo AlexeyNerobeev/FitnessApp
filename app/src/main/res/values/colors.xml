@@ -32,4 +32,6 @@
     <color name="trainingSchedule">#5DDDC7</color>
     <color name="uncheckedSwitch">#C6C4D4</color>
     <color name="trainingCard">#67C5B4</color>
+    <color name="startWorkGr">#00F0FF</color>
+    <color name="endWorkGr">#00FF66</color>
 </resources>

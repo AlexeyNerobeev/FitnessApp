@@ -40,6 +40,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.R
+import com.example.fitnessapp.common.ErrorAlertDialog
 import com.example.fitnessapp.common.TopAppBar
 import com.example.fitnessapp.feature_app.presentation.ActivityTracker.components.BarChartActivityTracker
 import com.example.fitnessapp.presentation.Registration.screens.montserratBold
@@ -57,6 +58,11 @@ fun PrevActivityTrackerScreen() {
 fun ActivityTrackerScreen(navController: NavController, vm: ActivityTrackerVM = koinViewModel()) {
     val state = vm.state.value
     vm.onEvent(ActivityTrackerEvent.GetTodayTarget)
+    if(state.error.isNotEmpty()){
+        ErrorAlertDialog(state.error) {
+            vm.onEvent(ActivityTrackerEvent.ClearError)
+        }
+    }
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Column(
             modifier = Modifier
@@ -265,6 +271,8 @@ fun ActivityTrackerScreen(navController: NavController, vm: ActivityTrackerVM = 
                         }
                     }
                 }
+                        Spacer(modifier = Modifier
+                            .height(15.dp))
                         BarChartActivityTracker()
                 Row(
                     modifier = Modifier

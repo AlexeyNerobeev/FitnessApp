@@ -18,10 +18,21 @@ class HomeVM(
         when(event){
             is HomeEvent.GetName ->{
                 viewModelScope.launch(Dispatchers.IO) {
-                    _state.value = state.value.copy(
-                        name = getNameUseCase.invoke()
-                    )
+                    try{
+                        _state.value = state.value.copy(
+                            name = getNameUseCase.invoke()
+                        )
+                    }catch (ex: Exception){
+                        _state.value = state.value.copy(
+                            error = ex.message.toString()
+                        )
+                    }
                 }
+            }
+            is HomeEvent.ClearError ->{
+                _state.value = state.value.copy(
+                    error = ""
+                )
             }
         }
     }

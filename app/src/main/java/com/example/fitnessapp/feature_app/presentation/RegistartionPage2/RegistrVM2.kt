@@ -36,11 +36,20 @@ class RegistrVM2(
             RegistrEvent2.Registration ->{
                 viewModelScope.launch {
                     try {
-                        registr2UseCase.invoke(state.value.gender, state.value.birthday,
-                            state.value.weight, state.value.height)
-                        _state.value = state.value.copy(
-                            isComplete = true
-                        )
+                        if(state.value.gender.isNotEmpty() &&
+                            state.value.birthday.isNotEmpty() &&
+                            state.value.weight != 0 &&
+                            state.value.height != 0){
+                            registr2UseCase.invoke(state.value.gender, state.value.birthday,
+                                state.value.weight, state.value.height)
+                            _state.value = state.value.copy(
+                                isComplete = true
+                            )
+                        } else{
+                            _state.value = state.value.copy(
+                                exception = "Не должно быть пустых полей!"
+                            )
+                        }
                     } catch (ex: Exception){
                         _state.value = state.value.copy(
                             exception = ex.message.toString()

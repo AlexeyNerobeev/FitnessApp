@@ -41,6 +41,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.NavRoutes
 import com.example.fitnessapp.R
 import com.example.fitnessapp.common.BottomAppBar
+import com.example.fitnessapp.common.ErrorAlertDialog
 import com.example.fitnessapp.common.TopAppBar
 import com.example.fitnessapp.presentation.Registration.screens.montserratBold
 import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
@@ -57,6 +58,11 @@ fun PrevProfileScreen() {
 fun ProfileScreen(navController: NavController, vm: ProfileVM = koinViewModel()) {
     val state = vm.state.value
     vm.onEvent(ProfileEvent.GetProfile)
+    if (state.error.isNotEmpty()){
+        ErrorAlertDialog(state.error) {
+            vm.onEvent(ProfileEvent.ClearError)
+        }
+    }
     LaunchedEffect(key1 = !state.goToWorkout) {
         if(state.goToWorkout){
             navController.navigate(NavRoutes.WorkoutTracker.route)

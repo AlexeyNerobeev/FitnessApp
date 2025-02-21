@@ -43,6 +43,7 @@ import com.example.fitnessapp.feature_app.presentation.Home.components.BarChartH
 import com.example.fitnessapp.NavRoutes
 import com.example.fitnessapp.R
 import com.example.fitnessapp.common.BottomAppBar
+import com.example.fitnessapp.common.ErrorAlertDialog
 import com.example.fitnessapp.feature_app.presentation.Home.HomeEvent
 import com.example.fitnessapp.feature_app.presentation.Home.HomeVM
 import com.example.fitnessapp.feature_app.presentation.Home.components.PieChartHome
@@ -61,6 +62,11 @@ fun PrevHome() {
 fun HomeScreen(navController: NavController, vm: HomeVM = koinViewModel()) {
     val state = vm.state.value
     vm.onEvent(HomeEvent.GetName)
+    if(state.error.isNotEmpty()){
+        ErrorAlertDialog(state.error) {
+            vm.onEvent(HomeEvent.ClearError)
+        }
+    }
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Column(
             modifier = Modifier

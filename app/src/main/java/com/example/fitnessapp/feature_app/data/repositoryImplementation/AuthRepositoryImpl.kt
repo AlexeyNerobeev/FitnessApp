@@ -75,7 +75,7 @@ class AuthRepositoryImpl: AuthRepository {
 
     private suspend fun getUserId() : String{
         supabase.auth.awaitInitialization()
-        return supabase.auth.currentUserOrNull()?.id ?: ""
+        return supabase.auth.currentUserOrNull()?.id?: ""
     }
 
     override suspend fun addTodayTarget(water: Int, steps: Int) {

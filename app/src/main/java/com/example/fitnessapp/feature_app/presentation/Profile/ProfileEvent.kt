@@ -4,4 +4,5 @@ sealed class ProfileEvent {
     data object ChangeCheck: ProfileEvent()
     data object GetProfile: ProfileEvent()
     data object GoToWorkoutTracker: ProfileEvent()
+    data object ClearError: ProfileEvent()
 }

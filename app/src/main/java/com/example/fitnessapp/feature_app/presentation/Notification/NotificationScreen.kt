@@ -32,6 +32,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberImagePainter
 import com.example.fitnessapp.R
+import com.example.fitnessapp.common.ErrorAlertDialog
 import com.example.fitnessapp.common.Notification
 import com.example.fitnessapp.common.TopAppBar
 import com.example.fitnessapp.feature_app.domain.models.Notification
@@ -48,6 +49,11 @@ fun NotificationScreen(navController: NavController, vm: NotificationVM = koinVi
     val state = vm.state.value
     vm.onEvent(NotificationEvent.GetNotifications)
     val notificationsList: List<Notification> = state.notifications
+    if(state.error.isNotEmpty()){
+        ErrorAlertDialog(state.error) {
+            vm.onEvent(NotificationEvent.ClearError)
+        }
+    }
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Column(modifier = Modifier
             .padding(innerPadding)

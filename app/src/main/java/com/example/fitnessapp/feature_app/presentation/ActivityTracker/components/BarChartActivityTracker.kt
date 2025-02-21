@@ -31,13 +31,13 @@ fun getBarChartDataActivityTracker(
             BarChartType.VERTICAL -> {
                 Point(
                     index.toFloat(),
-                    "%.2f".format(Random.nextDouble(1.0, maxRange.toDouble())).toFloat()
+                    Random.nextFloat()
                 )
             }
 
             BarChartType.HORIZONTAL -> {
                 Point(
-                    "%.2f".format(Random.nextDouble(1.0, maxRange.toDouble())).toFloat(),
+                    Random.nextFloat(),
                     index.toFloat()
                 )
             }
