@@ -40,9 +40,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.NavRoutes
 import com.example.fitnessapp.R
-import com.example.fitnessapp.common.BottomAppBar
-import com.example.fitnessapp.common.ErrorAlertDialog
-import com.example.fitnessapp.common.TopAppBar
+import com.example.fitnessapp.feature_app.presentation.common.BottomAppBar
+import com.example.fitnessapp.feature_app.presentation.common.ErrorAlertDialog
+import com.example.fitnessapp.feature_app.presentation.common.TopAppBar
 import com.example.fitnessapp.presentation.Registration.screens.montserratBold
 import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
 import com.example.fitnessapp.presentation.WelcomeScreen.poppinsFont
@@ -165,7 +165,6 @@ fun ProfileScreen(navController: NavController, vm: ProfileVM = koinViewModel())
                             Column(
                                 modifier = Modifier
                                     .padding(vertical = 11.dp)
-                                    .padding(horizontal = 33.dp)
                                     .fillMaxWidth(),
                                 horizontalAlignment = Alignment.CenterHorizontally
                             ) {
@@ -220,7 +219,6 @@ fun ProfileScreen(navController: NavController, vm: ProfileVM = koinViewModel())
                             Column(
                                 modifier = Modifier
                                     .padding(vertical = 11.dp)
-                                    .padding(horizontal = 33.dp)
                                     .fillMaxWidth(),
                                 horizontalAlignment = Alignment.CenterHorizontally
                             ) {
@@ -275,7 +273,6 @@ fun ProfileScreen(navController: NavController, vm: ProfileVM = koinViewModel())
                             Column(
                                 modifier = Modifier
                                     .padding(vertical = 11.dp)
-                                    .padding(horizontal = 33.dp)
                                     .fillMaxWidth(),
                                 horizontalAlignment = Alignment.CenterHorizontally
                             ) {

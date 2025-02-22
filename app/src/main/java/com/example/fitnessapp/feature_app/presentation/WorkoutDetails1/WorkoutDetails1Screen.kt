@@ -40,8 +40,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.NavRoutes
 import com.example.fitnessapp.R
-import com.example.fitnessapp.common.ErrorAlertDialog
-import com.example.fitnessapp.common.TopAppBar
+import com.example.fitnessapp.feature_app.presentation.common.ErrorAlertDialog
+import com.example.fitnessapp.feature_app.presentation.common.TopAppBar
 import com.example.fitnessapp.feature_app.presentation.WorkoutDetails1.components.Exerсise
 import com.example.fitnessapp.presentation.Registration.screens.montserratBold
 import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular

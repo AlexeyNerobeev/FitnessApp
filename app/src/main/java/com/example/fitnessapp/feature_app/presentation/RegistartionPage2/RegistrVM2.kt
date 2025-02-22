@@ -24,14 +24,26 @@ class RegistrVM2(
                 )
             }
             is RegistrEvent2.EnteredWeight ->{
-                _state.value = state.value.copy(
-                    weight = event.value
-                )
+                try{
+                    _state.value = state.value.copy(
+                        weight = event.value.toInt()
+                    )
+                } catch(ex: Exception){
+                    _state.value = state.value.copy(
+                        exception = "Введите число!"
+                    )
+                }
             }
             is RegistrEvent2.EnteredHeight ->{
-                _state.value = state.value.copy(
-                    height = event.value
-                )
+                try {
+                    _state.value = state.value.copy(
+                        height = event.value.toInt()
+                    )
+                } catch (ex: Exception){
+                    _state.value = state.value.copy(
+                        exception = "Введите число!"
+                    )
+                }
             }
             RegistrEvent2.Registration ->{
                 viewModelScope.launch {

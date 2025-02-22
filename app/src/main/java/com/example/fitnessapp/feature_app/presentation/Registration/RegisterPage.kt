@@ -44,7 +44,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.NavRoutes
 import com.example.fitnessapp.R
-import com.example.fitnessapp.common.ErrorAlertDialog
+import com.example.fitnessapp.feature_app.presentation.common.ErrorAlertDialog
 import com.example.fitnessapp.feature_app.domain.usecase.EmailValidationUseCase
 import com.example.fitnessapp.presentation.IncorrectEmailSnackBar.IncorrectEmailSnackBar
 import com.example.fitnessapp.feature_app.presentation.Registration.RegisterVM
@@ -52,6 +52,7 @@ import com.example.fitnessapp.feature_app.presentation.Registration.RegistrEvent
 import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
 import com.example.fitnessapp.presentation.WelcomeScreen.poppinsFont
 import org.koin.androidx.compose.koinViewModel
+import kotlin.math.sin
 
 val montserratBold = FontFamily(
     Font(
@@ -109,6 +110,7 @@ fun RegisterPage(navController: NavController, vm: RegisterVM = koinViewModel())
                     onValueChange = {
                         vm.onEvent(RegistrEvent.EnteredFio(it))
                     },
+                    singleLine = true,
                     shape = RoundedCornerShape(100.dp),
                     colors = OutlinedTextFieldDefaults.colors(
                         unfocusedBorderColor = colorResource(R.color.tfColor),
@@ -143,6 +145,7 @@ fun RegisterPage(navController: NavController, vm: RegisterVM = koinViewModel())
                     onValueChange = {
                         vm.onEvent(RegistrEvent.EnteredNumber(it))
                     },
+                    singleLine = true,
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Phone
                     ),
@@ -181,6 +184,7 @@ fun RegisterPage(navController: NavController, vm: RegisterVM = koinViewModel())
                     onValueChange = {
                         vm.onEvent(RegistrEvent.EnteredEmail(it))
                     },
+                    singleLine = true,
                     shape = RoundedCornerShape(100.dp),
                     colors = OutlinedTextFieldDefaults.colors(
                         unfocusedBorderColor = colorResource(R.color.tfColor),
@@ -216,6 +220,7 @@ fun RegisterPage(navController: NavController, vm: RegisterVM = koinViewModel())
                     onValueChange = {
                         vm.onEvent(RegistrEvent.EnteredPassword(it))
                     },
+                    singleLine = true,
                     shape = RoundedCornerShape(100.dp),
                     colors = OutlinedTextFieldDefaults.colors(
                         unfocusedBorderColor = colorResource(R.color.tfColor),

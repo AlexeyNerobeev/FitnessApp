@@ -6,11 +6,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.fitnessapp.feature_app.domain.usecase.GetNameUseCase
+import com.example.fitnessapp.feature_app.domain.usecase.NewNotificationUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class SuccessRegistrationVM(
-    private val getNameUseCase: GetNameUseCase
+    private val getNameUseCase: GetNameUseCase,
+    private val newNotificationUseCase: NewNotificationUseCase
 ): ViewModel() {
     private val _state = mutableStateOf(SuccessRegistrationState())
     val state: State<SuccessRegistrationState> = _state
@@ -34,6 +36,15 @@ class SuccessRegistrationVM(
                 _state.value = state.value.copy(
                     exception = ""
                 )
+            }
+            is SuccessRegistrationEvent.NewNotification ->{
+                viewModelScope.launch(Dispatchers.IO) {
+                    try {
+                        newNotificationUseCase.invoke()
+                    } catch (ex: Exception){
+                        Log.e("supa", ex.message.toString())
+                    }
+                }
             }
         }
     }

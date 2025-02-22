@@ -42,8 +42,8 @@ import co.yml.charts.ui.piechart.models.PieChartData
 import com.example.fitnessapp.feature_app.presentation.Home.components.BarChartHome
 import com.example.fitnessapp.NavRoutes
 import com.example.fitnessapp.R
-import com.example.fitnessapp.common.BottomAppBar
-import com.example.fitnessapp.common.ErrorAlertDialog
+import com.example.fitnessapp.feature_app.presentation.common.BottomAppBar
+import com.example.fitnessapp.feature_app.presentation.common.ErrorAlertDialog
 import com.example.fitnessapp.feature_app.presentation.Home.HomeEvent
 import com.example.fitnessapp.feature_app.presentation.Home.HomeVM
 import com.example.fitnessapp.feature_app.presentation.Home.components.PieChartHome

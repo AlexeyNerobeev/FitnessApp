@@ -43,7 +43,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.NavRoutes
 import com.example.fitnessapp.R
-import com.example.fitnessapp.common.TopAppBar
+import com.example.fitnessapp.feature_app.presentation.common.TopAppBar
 import com.example.fitnessapp.feature_app.presentation.ActivityTracker.components.BarChartActivityTracker
 import com.example.fitnessapp.feature_app.presentation.WorkoutTracker.components.BarChartWorkoutTracker
 import com.example.fitnessapp.presentation.Registration.screens.montserratBold

@@ -43,7 +43,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.NavRoutes
 import com.example.fitnessapp.R
-import com.example.fitnessapp.common.ErrorAlertDialog
+import com.example.fitnessapp.feature_app.presentation.common.ErrorAlertDialog
 import com.example.fitnessapp.feature_app.presentation.RegistartionPage2.RegistrEvent2
 import com.example.fitnessapp.feature_app.presentation.RegistartionPage2.RegistrVM2
 import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
@@ -121,6 +121,7 @@ fun RegisterPage2(navController: NavController, vm: RegistrVM2 = koinViewModel()
                         onValueChange = {
 
                         },
+                        singleLine = true,
                         colors = OutlinedTextFieldDefaults.colors(
                             unfocusedBorderColor = colorResource(R.color.tfColor),
                             focusedBorderColor = colorResource(R.color.tfColor),
@@ -199,6 +200,7 @@ fun RegisterPage2(navController: NavController, vm: RegistrVM2 = koinViewModel()
                         onValueChange = {
                             vm.onEvent(RegistrEvent2.EnteredBirthday(it))
                         },
+                        singleLine = true,
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Number
                         ),
@@ -247,11 +249,12 @@ fun RegisterPage2(navController: NavController, vm: RegistrVM2 = koinViewModel()
                             } else{
                                 state.weight.toString()
                             },
+                            singleLine = true,
                             keyboardOptions = KeyboardOptions(
                                 keyboardType = KeyboardType.Number
                             ),
                             onValueChange = {
-                                vm.onEvent(RegistrEvent2.EnteredWeight(it.toInt()))
+                                vm.onEvent(RegistrEvent2.EnteredWeight(it))
                             },
                             colors = OutlinedTextFieldDefaults.colors(
                                 unfocusedBorderColor = colorResource(R.color.tfColor),
@@ -321,11 +324,12 @@ fun RegisterPage2(navController: NavController, vm: RegistrVM2 = koinViewModel()
                             } else{
                                 state.height.toString()
                             },
+                            singleLine = true,
                             keyboardOptions = KeyboardOptions(
                                 keyboardType = KeyboardType.Number
                             ),
                             onValueChange = {
-                                vm.onEvent(RegistrEvent2.EnteredHeight(it.toInt()))
+                                vm.onEvent(RegistrEvent2.EnteredHeight(it))
                             },
                             colors = OutlinedTextFieldDefaults.colors(
                                 unfocusedBorderColor = colorResource(R.color.tfColor),

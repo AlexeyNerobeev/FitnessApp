@@ -38,7 +38,7 @@ val moduleVM = module {
         TargetVM(get())
     }
     viewModel<SuccessRegistrationVM>{
-        SuccessRegistrationVM(get())
+        SuccessRegistrationVM(get(), get())
     }
     viewModel<ProfileVM>{
         ProfileVM(get())

@@ -90,8 +90,6 @@ fun BarChartHome() {
         backgroundColor = colorResource(R.color.tfColor)
     )
     BarChart(modifier = Modifier
-        .height(81.dp)
-        .clip(RectangleShape)
-        .background(Color.Transparent, RectangleShape),
+        .height(81.dp),
         barChartData = barChartData)
 }

@@ -28,7 +28,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.NavRoutes
 import com.example.fitnessapp.R
-import com.example.fitnessapp.common.ErrorAlertDialog
+import com.example.fitnessapp.feature_app.presentation.common.ErrorAlertDialog
 import com.example.fitnessapp.feature_app.presentation.Registration.RegisterVM
 import com.example.fitnessapp.feature_app.presentation.SuccessRegistartion.SuccessRegistrationEvent
 import com.example.fitnessapp.feature_app.presentation.SuccessRegistartion.SuccessRegistrationVM
@@ -85,6 +85,7 @@ fun SuccessRegistration(navController: NavController, vm: SuccessRegistrationVM 
                 .fillMaxSize(),
                 contentAlignment = Alignment.BottomCenter){
                 Button(onClick = {
+                    vm.onEvent(SuccessRegistrationEvent.NewNotification)
                     navController.navigate(NavRoutes.Home.route)
                 },
                     modifier = Modifier

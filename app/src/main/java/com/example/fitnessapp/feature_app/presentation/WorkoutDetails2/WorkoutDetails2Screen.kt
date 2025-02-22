@@ -31,7 +31,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import co.yml.charts.ui.barchart.models.drawBarGraph
 import com.example.fitnessapp.R
-import com.example.fitnessapp.common.ErrorAlertDialog
+import com.example.fitnessapp.feature_app.presentation.common.ErrorAlertDialog
 import com.example.fitnessapp.presentation.Registration.screens.montserratBold
 import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
 import org.koin.androidx.compose.koinViewModel

@@ -1,4 +1,4 @@
-package com.example.fitnessapp.common
+package com.example.fitnessapp.feature_app.presentation.common
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -28,14 +28,14 @@ import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
 @Preview
 @Composable
 fun PrevNotification(){
-    Notification("https://sakpfhsanlbgslhkkknq.supabase.co/storage/v1/object/public/NotificationIcons//lunch_icon.svg",
+    CustomNotification("https://sakpfhsanlbgslhkkknq.supabase.co/storage/v1/object/public/NotificationIcons//lunch_icon.svg",
         "Время обеда",
         "1 мин. назад")
 }
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
-fun Notification(image: String, text: String, time: String) {
+fun CustomNotification(image: String, text: String, time: String) {
     Row(modifier = Modifier
         .fillMaxWidth()
         .padding(top = 30.dp)

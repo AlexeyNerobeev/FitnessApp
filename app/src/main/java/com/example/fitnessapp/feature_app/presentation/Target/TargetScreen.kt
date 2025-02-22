@@ -34,7 +34,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.R
 import com.example.fitnessapp.NavRoutes
-import com.example.fitnessapp.common.ErrorAlertDialog
+import com.example.fitnessapp.feature_app.presentation.common.ErrorAlertDialog
 import com.example.fitnessapp.feature_app.presentation.Target.TargetEvent
 import com.example.fitnessapp.feature_app.presentation.Target.components.Card2
 import com.example.fitnessapp.feature_app.presentation.Target.components.Card3
