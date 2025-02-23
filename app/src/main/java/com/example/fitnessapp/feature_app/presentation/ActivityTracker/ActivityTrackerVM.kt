@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.fitnessapp.feature_app.domain.models.Target
-import com.example.fitnessapp.feature_app.domain.usecase.GetTodayTargetUseCase
+import com.example.fitnessapp.feature_app.domain.usecase.Targets.GetTodayTargetUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

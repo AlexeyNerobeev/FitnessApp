@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.fitnessapp.feature_app.domain.models.Notification
-import com.example.fitnessapp.feature_app.domain.usecase.GetNotificationsUseCase
+import com.example.fitnessapp.feature_app.domain.usecase.Notification.GetNotificationsUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

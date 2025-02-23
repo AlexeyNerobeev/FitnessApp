@@ -4,7 +4,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.fitnessapp.feature_app.domain.usecase.GetNameUseCase
+import com.example.fitnessapp.feature_app.domain.usecase.Profile.GetNameUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

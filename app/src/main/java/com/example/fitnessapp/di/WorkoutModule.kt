@@ -2,10 +2,9 @@ package com.example.fitnessapp.di
 
 import com.example.fitnessapp.feature_app.data.repositoryImplementation.WorkoutRepositoryImpl
 import com.example.fitnessapp.feature_app.domain.repository.WorkoutRepository
-import com.example.fitnessapp.feature_app.domain.usecase.GetExerciseDataUseCase
-import com.example.fitnessapp.feature_app.domain.usecase.GetWorkoutDataUseCase
-import com.example.fitnessapp.feature_app.domain.usecase.SaveCompleteWorkoutUseCase
-import org.koin.core.scope.get
+import com.example.fitnessapp.feature_app.domain.usecase.Exercise.GetExerciseDataUseCase
+import com.example.fitnessapp.feature_app.domain.usecase.Workout.GetWorkoutDataUseCase
+import com.example.fitnessapp.feature_app.domain.usecase.Workout.SaveCompleteWorkoutUseCase
 import org.koin.dsl.module
 
 val moduleWorkout = module {

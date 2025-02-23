@@ -4,8 +4,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.fitnessapp.feature_app.domain.usecase.AddTargetUseCase
-import com.example.fitnessapp.feature_app.presentation.SuccessRegistartion.SuccessRegistrationEvent
+import com.example.fitnessapp.feature_app.domain.usecase.Targets.AddTargetUseCase
 import com.example.fitnessapp.feature_app.presentation.Target.TargetEvent
 import com.example.fitnessapp.feature_app.presentation.Target.TargetState
 import kotlinx.coroutines.launch

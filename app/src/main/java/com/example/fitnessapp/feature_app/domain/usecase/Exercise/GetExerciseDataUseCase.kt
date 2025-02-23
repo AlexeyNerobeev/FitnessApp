@@ -1,4 +1,4 @@
-package com.example.fitnessapp.feature_app.domain.usecase
+package com.example.fitnessapp.feature_app.domain.usecase.Exercise
 
 import com.example.fitnessapp.feature_app.domain.models.Exercise
 import com.example.fitnessapp.feature_app.domain.repository.WorkoutRepository

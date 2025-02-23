@@ -1,15 +1,11 @@
 package com.example.fitnessapp.feature_app.presentation.Registration
 
 import androidx.compose.runtime.State
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.fitnessapp.feature_app.domain.usecase.AddTodayTargetUseCase
-import com.example.fitnessapp.feature_app.domain.usecase.RegistrUseCase
-import com.example.fitnessapp.feature_app.presentation.RegistartionPage2.RegistrEvent2
+import com.example.fitnessapp.feature_app.domain.usecase.Targets.AddTodayTargetUseCase
+import com.example.fitnessapp.feature_app.domain.usecase.Registration.RegistrUseCase
 import kotlinx.coroutines.launch
 
 class RegisterVM(

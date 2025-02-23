@@ -20,7 +20,7 @@ import org.koin.dsl.module
 val moduleVM = module {
 
     viewModel<LoginVM> {
-        LoginVM(get())
+        LoginVM(get(), get(), get())
     }
     viewModel<RegisterVM>{
         RegisterVM(get(), get())

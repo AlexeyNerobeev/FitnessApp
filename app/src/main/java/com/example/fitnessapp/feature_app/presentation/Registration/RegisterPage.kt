@@ -45,14 +45,14 @@ import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.NavRoutes
 import com.example.fitnessapp.R
 import com.example.fitnessapp.feature_app.presentation.common.ErrorAlertDialog
-import com.example.fitnessapp.feature_app.domain.usecase.EmailValidationUseCase
+import com.example.fitnessapp.feature_app.domain.usecase.Registration.EmailValidationUseCase
+import com.example.fitnessapp.feature_app.domain.usecase.Registration.PasswordValidationUseCase
 import com.example.fitnessapp.presentation.IncorrectEmailSnackBar.IncorrectEmailSnackBar
 import com.example.fitnessapp.feature_app.presentation.Registration.RegisterVM
 import com.example.fitnessapp.feature_app.presentation.Registration.RegistrEvent
 import com.example.fitnessapp.presentation.WelcomeScreen.montserratRegular
 import com.example.fitnessapp.presentation.WelcomeScreen.poppinsFont
 import org.koin.androidx.compose.koinViewModel
-import kotlin.math.sin
 
 val montserratBold = FontFamily(
     Font(
@@ -294,10 +294,15 @@ fun RegisterPage(navController: NavController, vm: RegisterVM = koinViewModel())
                         .align(Alignment.BottomCenter),
                         horizontalAlignment = Alignment.CenterHorizontally) {
                         val emailCheck = EmailValidationUseCase()
+                        val passwordCheck = PasswordValidationUseCase()
                         Button(onClick = {
                             if(state.check){
-                                if(emailCheck.CheckEmail(state.email)){
-                                    vm.onEvent(RegistrEvent.Registration)
+                                if(emailCheck.checkEmail(state.email)){
+                                    if(passwordCheck.checkPassword(state.password)){
+                                        vm.onEvent(RegistrEvent.Registration)
+                                    } else{
+                                        vm.onEvent(RegistrEvent.ChangeErrorMessage("Пароль должен содержать не менее 6 символов"))
+                                    }
                                 } else{
                                     vm.onEvent(RegistrEvent.ChangeErrorMessage("Некорректная почта"))
                                 }

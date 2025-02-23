@@ -1,15 +1,13 @@
 package com.example.fitnessapp.feature_app.presentation.Profile
 
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.fitnessapp.feature_app.domain.models.Profile
-import com.example.fitnessapp.feature_app.domain.usecase.GetProfileUseCase
+import com.example.fitnessapp.feature_app.domain.usecase.Profile.GetProfileUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.serialization.builtins.serializer
 
 class ProfileVM(
     private val profileUseCase: GetProfileUseCase

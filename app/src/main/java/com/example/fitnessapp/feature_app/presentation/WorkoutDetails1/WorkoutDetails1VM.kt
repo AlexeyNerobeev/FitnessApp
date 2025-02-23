@@ -1,13 +1,11 @@
 package com.example.fitnessapp.feature_app.presentation.WorkoutDetails1
 
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.fitnessapp.feature_app.domain.usecase.GetWorkoutDataUseCase
-import com.example.fitnessapp.feature_app.domain.usecase.SaveCompleteWorkoutUseCase
-import io.ktor.util.Digest
+import com.example.fitnessapp.feature_app.domain.usecase.Workout.GetWorkoutDataUseCase
+import com.example.fitnessapp.feature_app.domain.usecase.Workout.SaveCompleteWorkoutUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

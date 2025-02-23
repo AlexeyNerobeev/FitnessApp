@@ -1,14 +1,9 @@
 package com.example.fitnessapp.presentation.OnBoard
 
 import androidx.compose.runtime.State
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.platform.LocalContext
-import androidx.core.app.OnNewIntentProvider
 import androidx.lifecycle.ViewModel
-import com.example.fitnessapp.feature_app.domain.usecase.SavePrefsUseCase
+import com.example.fitnessapp.feature_app.domain.usecase.SharedPreferenses.SavePrefsUseCase
 import com.example.fitnessapp.feature_app.presentation.OnBoard.OnBoardingEvent
 import com.example.fitnessapp.feature_app.presentation.OnBoard.OnBoardingState
 

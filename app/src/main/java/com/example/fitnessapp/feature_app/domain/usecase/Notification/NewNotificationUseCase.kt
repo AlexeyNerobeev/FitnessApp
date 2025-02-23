@@ -1,4 +1,4 @@
-package com.example.fitnessapp.feature_app.domain.usecase
+package com.example.fitnessapp.feature_app.domain.usecase.Notification
 
 import com.example.fitnessapp.feature_app.domain.repository.NotificationRepository
 

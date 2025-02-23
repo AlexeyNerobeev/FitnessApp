@@ -4,10 +4,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.fitnessapp.feature_app.domain.usecase.Registr2UseCase
-import com.example.fitnessapp.feature_app.domain.usecase.RegistrUseCase
-import com.example.fitnessapp.feature_app.presentation.Registration.RegistrEvent
-import com.example.fitnessapp.presentation.Login.LoginEvent
+import com.example.fitnessapp.feature_app.domain.usecase.Registration.Registr2UseCase
 import kotlinx.coroutines.launch
 
 class RegistrVM2(

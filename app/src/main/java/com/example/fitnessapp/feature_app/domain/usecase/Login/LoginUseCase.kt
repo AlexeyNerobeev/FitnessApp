@@ -1,4 +1,4 @@
-package com.example.fitnessapp.feature_app.domain.usecase
+package com.example.fitnessapp.feature_app.domain.usecase.Login
 
 import com.example.fitnessapp.feature_app.domain.repository.AuthRepository
 
